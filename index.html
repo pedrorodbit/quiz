@@ -77,7 +77,6 @@
     grid-template-rows: 1fr 1fr 1fr;
     gap: 5mm;
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-    page-break-after: always;
   }
 
   .card {
@@ -166,6 +165,7 @@
       width: 210mm; min-height: 297mm;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
+      page-break-after: always;
     }
     .card { border-color: #000; border-width: 1.5px; }
     .card-header { border-bottom-color: #000; }
@@ -187,7 +187,7 @@
   <div class="btn-bar">
     <button onclick="generatePages()">Gerar P&aacute;ginas</button>
     <button class="btn-pdf" onclick="downloadPDF()">Baixar PDF</button>
-    <button onclick="window.print()">Imprimir</button>
+    <button onclick="window.print()" id="printBtn" style="display:none">Imprimir</button>
     <span class="info" id="statusInfo">Nenhuma p&aacute;gina gerada</span>
   </div>
 </div>
@@ -409,9 +409,13 @@ function updateTotal() {
   });
   const info = document.getElementById('statusInfo');
   const pages = Math.ceil(total / QUESTIONS_PER_PAGE);
-  info.textContent = total > 0
-    ? total + ' quest\u00f5es | ' + pages + ' p\u00e1gina(s)'
-    : 'Nenhuma p\u00e1gina gerada';
+  const printBtn = document.getElementById('printBtn');
+  if (total > 0) {
+    info.textContent = total + ' quest\u00f5es | ' + pages + ' p\u00e1gina(s)';
+  } else {
+    info.textContent = 'Nenhuma p\u00e1gina gerada';
+    printBtn.style.display = 'none';
+  }
 }
 
 function getConfig() {
@@ -470,6 +474,7 @@ function generatePages() {
   if (catNames.length === 0) {
     document.getElementById('container').innerHTML = '<div class="empty-msg">Selecione ao menos uma categoria com quantidade maior que zero.</div>';
     document.getElementById('statusInfo').textContent = 'Nenhuma p\u00e1gina gerada';
+    document.getElementById('printBtn').style.display = 'none';
     return;
   }
 
@@ -488,6 +493,7 @@ function generatePages() {
 
   const info = document.getElementById('statusInfo');
   info.textContent = selected.length + ' quest\u00f5es em ' + pages.length + ' p\u00e1gina(s)';
+  document.getElementById('printBtn').style.display = '';
 
   window.scrollTo(0, 0);
 }
@@ -517,7 +523,7 @@ function downloadPDF() {
       format: 'a4',
       orientation: 'portrait',
     },
-    pagebreak: { mode: 'avoid-all' },
+    pagebreak: { mode: 'css', before: '.page', avoid: '.card' },
   }).from(container).save();
 }
 
