@@ -426,6 +426,7 @@ async function downloadPDF() {
   temp.style.position = 'absolute';
   temp.style.left = '0';
   temp.style.top = '0';
+  temp.style.width = '210mm';
   temp.style.zIndex = '-1';
   document.body.appendChild(temp);
 
@@ -433,6 +434,7 @@ async function downloadPDF() {
 
   for (var i = 0; i < pages.length; i++) {
     var clone = pages[i].cloneNode(true);
+    clone.style.margin = '0';
     temp.appendChild(clone);
     var canvas = await html2canvas(clone, {
       scale: 2,
