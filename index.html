@@ -279,7 +279,6 @@
   </div>
   <div class="btn-bar">
     <button onclick="generatePages()">Gerar P&aacute;ginas</button>
-    <button onclick="printPDF()" id="printBtn" style="display:none">Imprimir</button>
     <button class="btn-pdf" onclick="downloadPDF()" id="pdfBtn" style="display:none">Baixar PDF</button>
     <span class="info" id="statusInfo">Nenhuma p&aacute;gina gerada</span>
   </div>
@@ -354,12 +353,10 @@ function updateTotal() {
   const total = parseInt(totalInput.value) || 0;
   const pages = Math.ceil(total / QUESTIONS_PER_PAGE);
   const info = document.getElementById('statusInfo');
-  const printBtn = document.getElementById('printBtn');
   if (total > 0) {
     info.textContent = total + ' quest\u00f5es | ' + pages + ' p\u00e1gina(s)';
   } else {
     info.textContent = 'Nenhuma p\u00e1gina gerada';
-    printBtn.style.display = 'none';
     document.getElementById('pdfBtn').style.display = 'none';
   }
 }
@@ -445,7 +442,6 @@ function generatePages() {
   if (catNames.length === 0) {
     document.getElementById('container').innerHTML = '<div class="empty-msg">Selecione ao menos uma categoria com quantidade maior que zero.</div>';
     document.getElementById('statusInfo').textContent = 'Nenhuma p\u00e1gina gerada';
-    document.getElementById('printBtn').style.display = 'none';
     document.getElementById('pdfBtn').style.display = 'none';
     return;
   }
@@ -465,7 +461,6 @@ function generatePages() {
 
   const info = document.getElementById('statusInfo');
   info.textContent = selected.length + ' quest\u00f5es em ' + pages.length + ' p\u00e1gina(s)';
-  document.getElementById('printBtn').style.display = '';
   document.getElementById('pdfBtn').style.display = '';
 
   window.scrollTo(0, 0);
@@ -532,15 +527,6 @@ async function downloadPDF() {
     console.error(e);
   }
 }
-
-function printPDF() {
-  var pages = document.querySelectorAll('#container .page');
-  if (!pages.length) {
-    generatePages();
-  }
-  setTimeout(function () { window.print(); }, 100);
-}
-
 buildCategoryUI();
 </script>
 </body>
