@@ -1,5 +1,5 @@
 const QUESTIONS = [
-  // === ARTE E CULTURA (existing) ===
+  // === ARTE E CULTURA ===
   { category: 'Arte e Cultura', question: 'Quem pintou o teto da Capela Sistina?', options: ['Leonardo da Vinci', 'Michelangelo', 'Rafael', 'Donatello'], answer: 1, explanation: 'Michelangelo pintou o teto da Capela Sistina entre 1508 e 1512, a pedido do Papa Júlio II.', difficulty: 'medium' },
   { category: 'Arte e Cultura', question: 'Qual é o livro mais vendido da história, excluindo textos religiosos?', options: ['Dom Quixote', 'O Pequeno Príncipe', 'Um Conto de Duas Cidades', 'O Senhor dos Anéis'], answer: 0, explanation: 'Dom Quixote, de Miguel de Cervantes, é considerado o livro mais vendido da história com mais de 500 milhões de cópias.', difficulty: 'medium' },
   { category: 'Arte e Cultura', question: 'Quem escreveu a peça "Romeu e Julieta"?', options: ['Charles Dickens', 'William Shakespeare', 'Machado de Assis', 'Jane Austen'], answer: 1, explanation: 'William Shakespeare escreveu Romeu e Julieta por volta de 1595, uma das histórias de amor mais famosas do mundo.', difficulty: 'easy' },
@@ -12,7 +12,7 @@ const QUESTIONS = [
   { category: 'Arte e Cultura', question: 'Qual instrumento é símbolo da música nordestina brasileira e tem origem europeia?', options: ['Berimbau', 'Sanfona', 'Afoxé', 'Cuíca'], answer: 1, explanation: 'A sanfona (acordeão) é um instrumento de origem europeia, símbolo da música nordestina.', difficulty: 'medium' },
   { category: 'Arte e Cultura', question: 'Na arquitetura grega, qual é a ordem caracterizada por colunas simples e sem base?', options: ['Dórica', 'Jônica', 'Coríntia', 'Toscana'], answer: 0, explanation: 'A ordem Dórica é a mais simples, com colunas sem base e capitel simples, como no Partenon.', difficulty: 'hard' },
   { category: 'Arte e Cultura', question: 'Quem escreveu "Grande Sertão: Veredas"?', options: ['Guimarães Rosa', 'Clarice Lispector', 'Graciliano Ramos', 'Jorge Amado'], answer: 0, explanation: 'Guimarães Rosa publicou "Grande Sertão: Veredas" em 1956, obra-prima da literatura brasileira.', difficulty: 'hard' },
-  // === ARTE E CULTURA (new) ===
+  // === ARTE E CULTURA ===
   { category: 'Arte e Cultura', question: 'Qual pintor espanhol é conhecido por suas obras surrealistas como "A Persistência da Memória"?', options: ['Pablo Picasso', 'Salvador Dalí', 'Joan Miró', 'Francisco Goya'], answer: 1, explanation: 'Dalí criou "A Persistência da Memória" em 1931, com seus famosos relógios derretidos.', difficulty: 'medium' },
   { category: 'Arte e Cultura', question: 'O que é uma xilogravura?', options: ['Pintura em cerâmica', 'Gravura entalhada em madeira', 'Escultura em pedra', 'Desenho a carvão'], answer: 1, explanation: 'Xilogravura é a técnica de entalhar uma matriz de madeira para impressão.', difficulty: 'hard' },
   { category: 'Arte e Cultura', question: 'Qual movimento artístico brasileiro teve Tarsila do Amaral como principal expoente?', options: ['Modernismo', 'Barroco', 'Expressionismo', 'Concretismo'], answer: 0, explanation: 'Tarsila do Amaral foi figura central do Modernismo brasileiro, com obras como "Abaporu".', difficulty: 'easy' },
@@ -25,7 +25,7 @@ const QUESTIONS = [
   { category: 'Arte e Cultura', question: 'Qual técnica de pintura utiliza pigmentos misturados com gema de ovo?', options: ['Aquarela', 'Têmpera', 'Óleo', 'Acrílica'], answer: 1, explanation: 'A têmpera (ou egg tempera) usa gema de ovo como aglutinante, comum na Idade Média.', difficulty: 'medium' },
   { category: 'Arte e Cultura', question: 'Quem escreveu a obra "Os Sertões"?', options: ['Euclides da Cunha', 'Monteiro Lobato', 'Graciliano Ramos', 'José de Alencar'], answer: 0, explanation: 'Euclides da Cunha publicou "Os Sertões" em 1902, sobre a Guerra de Canudos.', difficulty: 'easy' },
   { category: 'Arte e Cultura', question: 'Qual estilo arquitetônico é caracterizado por arcos ogivais e vitrais coloridos?', options: ['Românico', 'Gótico', 'Barroco', 'Neoclássico'], answer: 1, explanation: 'A arquitetura gótica, comum em catedrais medievais, destaca-se por arcos ogivais e vitrais.', difficulty: 'easy' },
-  // === ARTE E CULTURA (novas) ===
+  // === ARTE E CULTURA ===
   { category: 'Arte e Cultura', question: 'Quem pintou "O Grito"?', options: ['Vincent van Gogh', 'Edvard Munch', 'Pablo Picasso', 'Salvador Dalí'], answer: 1, explanation: 'Edvard Munch pintou "O Grito" em 1893, ícone do expressionismo.', difficulty: 'medium' },
   { category: 'Arte e Cultura', question: 'Qual é a obra mais famosa de Leonardo da Vinci?', options: ['A Última Ceia', 'Mona Lisa', 'A Virgem das Rochas', 'O Homem Vitruviano'], answer: 1, explanation: 'Mona Lisa (1503-1506) está no Louvre e é a pintura mais famosa do mundo.', difficulty: 'easy' },
   { category: 'Arte e Cultura', question: 'Qual museu tem a maior coleção de arte do mundo?', options: ['Louvre', 'Museu Britânico', 'Metropolitan', 'Hermitage'], answer: 0, explanation: 'O Louvre em Paris tem cerca de 38.000 obras de arte.', difficulty: 'medium' },
@@ -50,7 +50,7 @@ const QUESTIONS = [
   { category: 'Arte e Cultura', question: 'Qual desses é um período da arte grega?', options: ['Arcaico', 'Clássico', 'Helenístico', 'Todos os anteriores'], answer: 3, explanation: 'A arte grega é dividida em períodos arcaico, clássico e helenístico.', difficulty: 'hard' },
   { category: 'Arte e Cultura', question: 'Qual é o artista mais bem pago do mundo atualmente?', options: ['Damien Hirst', 'Jeff Koons', 'Banksy', 'Gerhard Richter'], answer: 1, explanation: 'Jeff Koons lidera vendas de artistas vivos, com obras chegando a US$ 91 milhões.', difficulty: 'hard' },
   { category: 'Arte e Cultura', question: 'Qual escritor russo escreveu "Guerra e Paz"?', options: ['Dostoiévski', 'Tolstói', 'Tchekhov', 'Turguêniev'], answer: 1, explanation: 'Liev Tolstói publicou "Guerra e Paz" entre 1865 e 1869.', difficulty: 'medium' },
-  // === ASTRONOMIA (existing) ===
+  // === ASTRONOMIA ===
   { category: 'Astronomia', question: 'Qual o planeta mais próximo do Sol?', options: ['Vênus', 'Mercúrio', 'Terra', 'Marte'], answer: 1, explanation: 'Mercúrio é o planeta mais próximo do Sol, a 57,9 milhões de km de distância.', difficulty: 'easy' },
   { category: 'Astronomia', question: 'Quantas luas tem Marte?', options: ['1', '2', '3', 'Nenhuma'], answer: 1, explanation: 'Marte possui duas luas: Fobos e Deimos, descobertas em 1877.', difficulty: 'medium' },
   { category: 'Astronomia', question: 'O que é um buraco negro?', options: ['Uma estrela que explodiu', 'Uma região onde a gravidade impede até a luz de escapar', 'Um planeta sem atmosfera', 'Uma nuvem de poeira interestelar'], answer: 1, explanation: 'Um buraco negro tem gravidade tão intensa que nada, nem a luz, consegue escapar.', difficulty: 'medium' },
@@ -63,7 +63,7 @@ const QUESTIONS = [
   { category: 'Astronomia', question: 'Quantas estrelas existem aproximadamente na Via Láctea?', options: ['100 milhões', '1 bilhão', '100 bilhões', '1 trilhão'], answer: 2, explanation: 'A Via Láctea contém entre 100 e 400 bilhões de estrelas.', difficulty: 'hard' },
   { category: 'Astronomia', question: 'Qual a principal diferença entre meteoro e meteorito?', options: ['Tamanho e cor', 'Meteoro está no espaço; meteorito caiu na Terra', 'Não há diferença', 'Meteorito é mais brilhante'], answer: 1, explanation: 'Meteoro é o fenômeno luminoso na atmosfera. Meteorito é o fragmento que atinge o solo.', difficulty: 'medium' },
   { category: 'Astronomia', question: 'Em que ano o homem pisou na Lua pela primeira vez?', options: ['1965', '1967', '1969', '1971'], answer: 2, explanation: 'Em 20 de julho de 1969, Neil Armstrong pisou na Lua na missão Apollo 11.', difficulty: 'easy' },
-  // === ASTRONOMIA (new) ===
+  // === ASTRONOMIA ===
   { category: 'Astronomia', question: 'Qual planeta do Sistema Solar tem o dia mais curto?', options: ['Mercúrio', 'Júpiter', 'Saturno', 'Marte'], answer: 1, explanation: 'Júpiter completa uma rotação em cerca de 9 horas e 55 minutos, o dia mais curto.', difficulty: 'hard' },
   { category: 'Astronomia', question: 'O que são exoplanetas?', options: ['Planetas fora do Sistema Solar', 'Planetas extintos', 'Luas de Saturno', 'Estrelas anãs'], answer: 0, explanation: 'Exoplanetas orbitam estrelas além do nosso Sistema Solar; o primeiro foi descoberto em 1992.', difficulty: 'easy' },
   { category: 'Astronomia', question: 'Qual é a maior lua de Saturno?', options: ['Europa', 'Titã', 'Ganimedes', 'Encélado'], answer: 1, explanation: 'Titã é a maior lua de Saturno e a segunda maior do Sistema Solar, com atmosfera densa.', difficulty: 'medium' },
@@ -76,7 +76,7 @@ const QUESTIONS = [
   { category: 'Astronomia', question: 'Qual planeta tem a maior mancha vermelha?', options: ['Marte', 'Júpiter', 'Saturno', 'Netuno'], answer: 1, explanation: 'A Grande Mancha Vermelha de Júpiter é uma tempestade maior que a Terra.', difficulty: 'medium' },
   { category: 'Astronomia', question: 'Em média, quanto tempo leva o Sol para orbitar o centro da Via Láctea?', options: ['100 mil anos', '230 milhões de anos', '1 bilhão de anos', '10 milhões de anos'], answer: 1, explanation: 'O Sol completa uma órbita galáctica em cerca de 230 milhões de anos.', difficulty: 'hard' },
   { category: 'Astronomia', question: 'O que é uma supernova?', options: ['Nascimento de uma estrela', 'Explosão violenta de uma estrela massiva', 'Colisão de duas galáxias', 'Formação de planeta'], answer: 1, explanation: 'Uma supernova é a explosão de uma estrela no fim de sua vida, liberando enorme energia.', difficulty: 'hard' },
-  // === ASTRONOMIA (novas) ===
+  // === ASTRONOMIA ===
   { category: 'Astronomia', question: 'Qual a distância da Terra ao Sol?', options: ['100 milhões de km', '150 milhões de km', '200 milhões de km', '250 milhões de km'], answer: 1, explanation: 'A distância média é de 149,6 milhões de km, chamada de Unidade Astronômica (UA).', difficulty: 'hard' },
   { category: 'Astronomia', question: 'O que é uma nebulosa?', options: ['Estrela morta', 'Nuvem de gás e poeira no espaço', 'Buraco negro', 'Planeta gasoso'], answer: 1, explanation: 'Nebulosas são regiões do espaço interestelar com gás e poeira.', difficulty: 'medium' },
   { category: 'Astronomia', question: 'Quantas luas tem Júpiter?', options: ['53', '67', '79', '95'], answer: 3, explanation: 'Júpiter tem 95 luas conhecidas, incluindo as quatro galileanas.', difficulty: 'hard' },
@@ -101,7 +101,7 @@ const QUESTIONS = [
   { category: 'Astronomia', question: 'Qual a ciência que estuda os corpos celestes?', options: ['Astrologia', 'Astronomia', 'Cosmologia', 'Astrofísica'], answer: 1, explanation: 'Astronomia é a ciência que estuda os astros e fenômenos celestes.', difficulty: 'easy' },
   { category: 'Astronomia', question: 'O que são meteoroides?', options: ['Estrelas cadentes', 'Fragmentos rochosos no espaço', 'Luas pequenas', 'Anéis planetários'], answer: 1, explanation: 'Meteoroides são pedaços de rocha ou metal em órbita no espaço.', difficulty: 'medium' },
   { category: 'Astronomia', question: 'Qual é a idade estimada do Sol?', options: ['2,5 bilhões de anos', '4,6 bilhões de anos', '6,8 bilhões de anos', '10 bilhões de anos'], answer: 1, explanation: 'O Sol tem aproximadamente 4,6 bilhões de anos, meia-vida estimada de 10 bilhões.', difficulty: 'medium' },
-  // === GASTRONOMIA (existing) ===
+  // === GASTRONOMIA ===
   { category: 'Gastronomia', question: 'Qual país é o maior produtor de café do mundo?', options: ['Colômbia', 'Vietnã', 'Brasil', 'Etiópia'], answer: 2, explanation: 'O Brasil é o maior produtor de café, com cerca de um terço da produção global.', difficulty: 'easy' },
   { category: 'Gastronomia', question: 'Qual destes é um prato típico da culinária peruana?', options: ['Paella', 'Ceviche', 'Arepa', 'Tacos'], answer: 1, explanation: 'O ceviche é um prato peruano de peixe cru "cozido" no suco de limão.', difficulty: 'medium' },
   { category: 'Gastronomia', question: 'Que ingrediente é essencial para fazer pão?', options: ['Ovos', 'Manteiga', 'Fermento', 'Açúcar'], answer: 2, explanation: 'O fermento é essencial para a massa do pão crescer, produzindo gás carbônico.', difficulty: 'easy' },
@@ -114,7 +114,7 @@ const QUESTIONS = [
   { category: 'Gastronomia', question: 'De qual país é originária a pizza?', options: ['Espanha', 'França', 'Itália', 'Grécia'], answer: 2, explanation: 'A pizza moderna é originária de Nápoles, Itália.', difficulty: 'easy' },
   { category: 'Gastronomia', question: 'Qual especiaria é obtida da casca de uma árvore?', options: ['Cravo', 'Canela', 'Noz-moscada', 'Gengibre'], answer: 1, explanation: 'A canela é a casca interna de árvores do gênero Cinnamomum, seca em paus.', difficulty: 'medium' },
   { category: 'Gastronomia', question: 'Que fermentado brasileiro é destilado da cana-de-açúcar?', options: ['Cachaça', 'Rum', 'Vodka', 'Saquê'], answer: 0, explanation: 'A cachaça é uma aguardente brasileira da fermentação e destilação do caldo de cana.', difficulty: 'easy' },
-  // === GASTRONOMIA (new) ===
+  // === GASTRONOMIA ===
   { category: 'Gastronomia', question: 'Qual tipo de arroz é tradicionalmente usado no risoto?', options: ['Arroz branco', 'Arroz arbóreo', 'Arroz integral', 'Arroz jasmim'], answer: 1, explanation: 'O arroz arbóreo tem alto teor de amido, dando a cremosidade característica do risoto.', difficulty: 'easy' },
   { category: 'Gastronomia', question: 'De onde é originário o churrasco como conhecemos hoje?', options: ['Argentina', 'Brasil', 'Uruguai', 'Chile'], answer: 1, explanation: 'O churrasco brasileiro tem origem na tradição dos gaúchos do Rio Grande do Sul.', difficulty: 'medium' },
   { category: 'Gastronomia', question: 'Qual destes cortes de carne bovina é o mais macio?', options: ['Acém', 'Filé mignon', 'Coxão mole', 'Paleta'], answer: 1, explanation: 'O filé mignon é o corte mais macio por vir do músculo que quase não trabalha.', difficulty: 'easy' },
@@ -127,7 +127,7 @@ const QUESTIONS = [
   { category: 'Gastronomia', question: 'O que é foie gras?', options: ['Queijo francês', 'Fígado de ganso ou pato', 'Sobremesa de chocolate', 'Caldo de peixe'], answer: 1, explanation: 'Foie gras é o fígado de ganso ou pato superalimentado, iguaria francesa.', difficulty: 'medium' },
   { category: 'Gastronomia', question: 'Qual a temperatura ideal para servir vinho tinto encorpado?', options: ['6-8°C', '10-12°C', '16-18°C', '22-24°C'], answer: 2, explanation: 'Vinhos tintos encorpados são servidos entre 16°C e 18°C para realçar aromas.', difficulty: 'hard' },
   { category: 'Gastronomia', question: 'Qual país é famoso pelo prato "massaman curry"?', options: ['Índia', 'Tailândia', 'China', 'Malásia'], answer: 1, explanation: 'O massaman curry é um curry tailandês de influência persa, com amendoim e especiarias.', difficulty: 'medium' },
-  // === GASTRONOMIA (novas) ===
+  // === GASTRONOMIA ===
   { category: 'Gastronomia', question: 'Qual é o ingrediente principal do pão?', options: ['Ovos', 'Leite', 'Farinha', 'Manteiga'], answer: 2, explanation: 'Farinha de trigo é a base para a maioria dos pães.', difficulty: 'easy' },
   { category: 'Gastronomia', question: 'Qual país é famoso pelo prato "paella"?', options: ['México', 'Espanha', 'Itália', 'Portugal'], answer: 1, explanation: 'A paella é um prato típico da região de Valência, Espanha.', difficulty: 'medium' },
   { category: 'Gastronomia', question: 'Qual destes é um corte de carne bovina?', options: ['Filé mignon', 'Lombo', 'Paleta', 'Coxão mole'], answer: 0, explanation: 'Filé mignon é o corte mais nobre e macio da carne bovina.', difficulty: 'hard' },
@@ -152,7 +152,7 @@ const QUESTIONS = [
   { category: 'Gastronomia', question: 'Qual a temperatura ideal para servir champanhe?', options: ['4-6°C', '6-8°C', '8-10°C', '10-12°C'], answer: 1, explanation: 'Champanhe é servido entre 6°C e 8°C para preservar as borbulhas.', difficulty: 'hard' },
   { category: 'Gastronomia', question: 'Qual a origem do chá mate?', options: ['Argentina', 'Brasil', 'Paraguai', 'Uruguai'], answer: 2, explanation: 'O chimarrão (erva-mate) tem origem no Paraguai e é consumido no sul da América do Sul.', difficulty: 'hard' },
   { category: 'Gastronomia', question: 'O que significa "além da conta" no contexto de restaurante?', options: ['Comida extra', 'Conta paga', 'Gorjeta', 'Desconto'], answer: 2, explanation: 'Gorjeta é um valor extra pago pelo cliente além da conta.', difficulty: 'medium' },
-  // === TECNOLOGIA (existing) ===
+  // === TECNOLOGIA ===
   { category: 'Tecnologia', question: 'O que significa a sigla HTML?', options: ['HyperText Markup Language', 'High Tech Modern Language', 'Home Tool Markup Language', 'Hyper Transfer Markup Language'], answer: 0, explanation: 'HTML (HyperText Markup Language) é a linguagem padrão para criar páginas web.', difficulty: 'easy' },
   { category: 'Tecnologia', question: 'O que é um algoritmo de machine learning supervisionado?', options: ['Aprende com dados não rotulados', 'Aprende com dados rotulados para fazer previsões', 'Não precisa de dados', 'Usa regras fixas'], answer: 1, explanation: 'Aprendizado supervisionado usa dados rotulados para treinar o modelo.', difficulty: 'hard' },
   { category: 'Tecnologia', question: 'Qual linguagem é usada para estilizar páginas web?', options: ['HTML', 'CSS', 'JavaScript', 'SQL'], answer: 1, explanation: 'CSS controla a aparência das páginas web: cores, fontes, espaçamentos e layouts.', difficulty: 'easy' },
@@ -165,7 +165,7 @@ const QUESTIONS = [
   { category: 'Tecnologia', question: 'Quantos bits tem um byte?', options: ['4', '8', '16', '32'], answer: 1, explanation: 'Um byte é composto por 8 bits, unidade básica de armazenamento.', difficulty: 'easy' },
   { category: 'Tecnologia', question: 'O que faz o comando "git commit"?', options: ['Baixa alterações do repositório remoto', 'Salva um snapshot das alterações localmente', 'Envia alterações para o servidor', 'Cria um novo repositório'], answer: 1, explanation: 'git commit cria um ponto de salvamento no repositório Git local.', difficulty: 'medium' },
   { category: 'Tecnologia', question: 'Qual modelo de dados é mais usado para escalabilidade horizontal em aplicações modernas?', options: ['Relacional', 'Documento', 'Chave-valor', 'Grafo'], answer: 0, explanation: 'Bancos relacionais como PostgreSQL continuam amplamente usados, enquanto NoSQL ganha espaço para escalabilidade.', difficulty: 'hard' },
-  // === TECNOLOGIA (new) ===
+  // === TECNOLOGIA ===
   { category: 'Tecnologia', question: 'O que significa a sigla SQL?', options: ['Structured Query Language', 'Simple Query Logic', 'Sequential Question Language', 'Standard Query List'], answer: 0, explanation: 'SQL é a linguagem padrão para gerenciar e consultar bancos de dados relacionais.', difficulty: 'easy' },
   { category: 'Tecnologia', question: 'Qual empresa desenvolveu o sistema operacional Android?', options: ['Apple', 'Microsoft', 'Google', 'Samsung'], answer: 2, explanation: 'O Android foi desenvolvido pelo Google e lançado em 2008.', difficulty: 'easy' },
   { category: 'Tecnologia', question: 'O que é um firewall?', options: ['Programa que acelera a internet', 'Sistema de segurança que controla o tráfego de rede', 'Software de edição de vídeo', 'Navegador web'], answer: 1, explanation: 'Firewall monitora e filtra o tráfego de rede com base em regras de segurança.', difficulty: 'medium' },
@@ -178,7 +178,7 @@ const QUESTIONS = [
   { category: 'Tecnologia', question: 'O que é blockchain?', options: ['Tipo de banco de dados', 'Livro-razão distribuído e imutável', 'Rede social descentralizada', 'Linguagem de programação'], answer: 1, explanation: 'Blockchain é uma tecnologia de registro distribuído que garante integridade dos dados.', difficulty: 'hard' },
   { category: 'Tecnologia', question: 'Qual a função de um compilador?', options: ['Executar o código', 'Traduzir código fonte para código de máquina', 'Gerenciar memória', 'Conectar à internet'], answer: 1, explanation: 'O compilador traduz código escrito em linguagem de alto nível para linguagem de máquina.', difficulty: 'medium' },
   { category: 'Tecnologia', question: 'O que é o "Internet das Coisas" (IoT)?', options: ['Rede de computadores quânticos', 'Conexão de objetos cotidianos à internet', 'Nova versão da internet', 'Protocolo de segurança'], answer: 1, explanation: 'IoT conecta dispositivos do dia a dia (eletrodomésticos, sensores) à internet.', difficulty: 'hard' },
-  // === TECNOLOGIA (novas) ===
+  // === TECNOLOGIA ===
   { category: 'Tecnologia', question: 'O que significa a sigla HTTP?', options: ['HyperText Transfer Protocol', 'High Tech Transfer Program', 'Hyper Text Transmission Process', 'Home Tool Transfer Protocol'], answer: 0, explanation: 'HTTP é o protocolo de transferência de hipertexto da web.', difficulty: 'easy' },
   { category: 'Tecnologia', question: 'Qual empresa criou o Windows?', options: ['Apple', 'Microsoft', 'IBM', 'Google'], answer: 1, explanation: 'Microsoft criou o Windows, lançado em 1985.', difficulty: 'easy' },
   { category: 'Tecnologia', question: 'O que é um algoritmo?', options: ['Programa de computador', 'Sequência lógica de passos para resolver um problema', 'Linguagem de programação', 'Banco de dados'], answer: 1, explanation: 'Algoritmo é uma sequência finita e ordenada de passos para resolver um problema.', difficulty: 'medium' },
@@ -203,7 +203,7 @@ const QUESTIONS = [
   { category: 'Tecnologia', question: 'O que faz o comando "git push"?', options: ['Baixa alterações', 'Envia commits locais para o repositório remoto', 'Cria nova branch', 'Mescla branches'], answer: 1, explanation: 'git push envia commits do repositório local para o remoto.', difficulty: 'hard' },
   { category: 'Tecnologia', question: 'O que é escalabilidade horizontal?', options: ['Melhorar hardware existente', 'Adicionar mais servidores ao sistema', 'Otimizar código', 'Reduzir funcionalidades'], answer: 1, explanation: 'Escalabilidade horizontal adiciona mais máquinas para aumentar capacidade.', difficulty: 'hard' },
   { category: 'Tecnologia', question: 'Qual empresa é dona do Instagram?', options: ['Google', 'Meta', 'Microsoft', 'Amazon'], answer: 1, explanation: 'Meta (Facebook) comprou o Instagram em 2012 por US$ 1 bilhão.', difficulty: 'easy' },
-  // === HISTÓRIA (existing) ===
+  // === HISTÓRIA ===
   { category: 'História', question: 'Em que ano o Brasil foi descoberto pelos portugueses?', options: ['1492', '1500', '1502', '1498'], answer: 1, explanation: 'O Brasil foi descoberto em 22 de abril de 1500 por Pedro Álvares Cabral.', difficulty: 'easy' },
   { category: 'História', question: 'Quem foi o primeiro presidente do Brasil?', options: ['Getúlio Vargas', 'Deodoro da Fonseca', 'Prudente de Morais', 'Marechal Floriano'], answer: 1, explanation: 'Deodoro da Fonseca foi o primeiro presidente (1889-1891) após a Proclamação da República.', difficulty: 'medium' },
   { category: 'História', question: 'Em que ano terminou a Segunda Guerra Mundial?', options: ['1943', '1944', '1945', '1946'], answer: 2, explanation: 'A Segunda Guerra terminou em 1945, com a rendição da Alemanha (maio) e do Japão (setembro).', difficulty: 'easy' },
@@ -216,7 +216,7 @@ const QUESTIONS = [
   { category: 'História', question: 'Qual tratado encerrou a Primeira Guerra Mundial?', options: ['Tratado de Paris', 'Tratado de Versalhes', 'Tratado de Tordesilhas', 'Tratado de Viena'], answer: 1, explanation: 'O Tratado de Versalhes (1919) impôs condições severas à Alemanha.', difficulty: 'hard' },
   { category: 'História', question: 'Quem foi o primeiro imperador do Brasil?', options: ['Dom João VI', 'Dom Pedro I', 'Dom Pedro II', 'Dom Miguel I'], answer: 1, explanation: 'Dom Pedro I foi o primeiro imperador do Brasil, coroado após a Independência em 1822.', difficulty: 'medium' },
   { category: 'História', question: 'Qual era a capital do Brasil antes de Brasília?', options: ['Salvador', 'Rio de Janeiro', 'São Paulo', 'Ouro Preto'], answer: 1, explanation: 'O Rio de Janeiro foi capital de 1763 a 1960, quando Brasília foi inaugurada.', difficulty: 'easy' },
-  // === HISTÓRIA (new) ===
+  // === HISTÓRIA ===
   { category: 'História', question: 'Quem foi o último imperador do Brasil?', options: ['Dom Pedro I', 'Dom Pedro II', 'Dom João VI', 'Princesa Isabel'], answer: 1, explanation: 'Dom Pedro II foi imperador de 1831 a 1889, quando a República foi proclamada.', difficulty: 'easy' },
   { category: 'História', question: 'Em que ano foi assinada a Lei Áurea no Brasil?', options: ['1885', '1888', '1889', '1890'], answer: 1, explanation: 'A Lei Áurea, que aboliu a escravidão, foi assinada em 13 de maio de 1888 pela Princesa Isabel.', difficulty: 'easy' },
   { category: 'História', question: 'Qual civilização da Mesopotâmia criou o primeiro código de leis escrito?', options: ['Egípcios', 'Babilônios', 'Fenícios', 'Persas'], answer: 1, explanation: 'O Código de Hamurabi (c. 1750 a.C.) foi criado pelo rei Hamurabi da Babilônia.', difficulty: 'medium' },
@@ -229,7 +229,7 @@ const QUESTIONS = [
   { category: 'História', question: 'Em que século ocorreu a Revolução Francesa?', options: ['XVI', 'XVII', 'XVIII', 'XIX'], answer: 2, explanation: 'A Revolução Francesa começou em 1789, no século XVIII.', difficulty: 'medium' },
   { category: 'História', question: 'Qual povo construiu as linhas de Nazca no Peru?', options: ['Incas', 'Mochica', 'Nazca', 'Chavín'], answer: 2, explanation: 'A cultura Nazca (200 a.C. - 600 d.C.) criou os geoglifos no deserto peruano.', difficulty: 'easy' },
   { category: 'História', question: 'Quem foi o primeiro presidente dos Estados Unidos?', options: ['Thomas Jefferson', 'George Washington', 'Abraham Lincoln', 'John Adams'], answer: 1, explanation: 'George Washington foi o primeiro presidente, de 1789 a 1797.', difficulty: 'easy' },
-  // === HISTÓRIA (novas) ===
+  // === HISTÓRIA ===
   { category: 'História', question: 'Em que ano começou a Primeira Guerra Mundial?', options: ['1912', '1914', '1916', '1918'], answer: 1, explanation: 'A Primeira Guerra Mundial começou em 28 de julho de 1914.', difficulty: 'medium' },
   { category: 'História', question: 'Quem foi o último czar da Rússia?', options: ['Pedro, o Grande', 'Alexandre III', 'Nicolau II', 'Ivan, o Terrível'], answer: 2, explanation: 'Nicolau II foi executado em 1918 com sua família.', difficulty: 'hard' },
   { category: 'História', question: 'Qual foi a primeira capital do Brasil?', options: ['Rio de Janeiro', 'Salvador', 'São Paulo', 'Olinda'], answer: 1, explanation: 'Salvador foi a primeira capital do Brasil, de 1549 a 1763.', difficulty: 'hard' },
@@ -254,7 +254,7 @@ const QUESTIONS = [
   { category: 'História', question: 'Em que ano a ONU foi fundada?', options: ['1942', '1945', '1948', '1950'], answer: 1, explanation: 'A ONU foi fundada em 24 de outubro de 1945 após a Segunda Guerra Mundial.', difficulty: 'medium' },
   { category: 'História', question: 'Qual civilização criou o calendário de 365 dias?', options: ['Gregos', 'Egípcios', 'Romanos', 'Maias'], answer: 1, explanation: 'Os egípcios criaram o calendário solar de 365 dias por volta de 3000 a.C.', difficulty: 'hard' },
   { category: 'História', question: 'O que foi o "Milagre Econômico Brasileiro"?', options: ['Descoberta do petróleo', 'Crescimento acelerado do PIB entre 1968-1973', 'Fim da inflação', 'Independência do Brasil'], answer: 1, explanation: 'O Milagre Econômico foi o período de alto crescimento durante o regime militar.', difficulty: 'hard' },
-  // === GEOGRAFIA (existing) ===
+  // === GEOGRAFIA ===
   { category: 'Geografia', question: 'Qual o maior oceano do mundo?', options: ['Atlântico', 'Índico', 'Pacífico', 'Ártico'], answer: 2, explanation: 'O Oceano Pacífico é o maior, cobrindo cerca de 165 milhões de km².', difficulty: 'easy' },
   { category: 'Geografia', question: 'Qual o país com maior extensão territorial?', options: ['Estados Unidos', 'Canadá', 'China', 'Rússia'], answer: 3, explanation: 'A Rússia é o maior país, com 17,1 milhões de km².', difficulty: 'easy' },
   { category: 'Geografia', question: 'Qual a capital da Austrália?', options: ['Sydney', 'Melbourne', 'Camberra', 'Brisbane'], answer: 2, explanation: 'Camberra é a capital desde 1913, um compromisso entre Sydney e Melbourne.', difficulty: 'medium' },
@@ -267,7 +267,7 @@ const QUESTIONS = [
   { category: 'Geografia', question: 'Qual estreito separa a América do Sul da Antártida?', options: ['Bering', 'Magalhães', 'Drake', 'Gibraltar'], answer: 2, explanation: 'O Estreito de Drake conecta os oceanos Atlântico e Pacífico.', difficulty: 'hard' },
   { category: 'Geografia', question: 'Qual a capital do Canadá?', options: ['Toronto', 'Vancouver', 'Montreal', 'Ottawa'], answer: 3, explanation: 'Ottawa é a capital, localizada na província de Ontário.', difficulty: 'hard' },
   { category: 'Geografia', question: 'Qual bioma brasileiro é o mais ameaçado pelo desmatamento?', options: ['Pantanal', 'Amazônia', 'Cerrado', 'Mata Atlântica'], answer: 1, explanation: 'A Amazônia sofre com desmatamento intenso para agropecuária e mineração.', difficulty: 'medium' },
-  // === GEOGRAFIA (new) ===
+  // === GEOGRAFIA ===
   { category: 'Geografia', question: 'Qual é o maior arquipélago do mundo?', options: ['Havaí', 'Filipinas', 'Indonésia', 'Maldivas'], answer: 2, explanation: 'A Indonésia tem mais de 17.000 ilhas, formando o maior arquipélago.', difficulty: 'hard' },
   { category: 'Geografia', question: 'Qual país possui o maior litoral do mundo?', options: ['Estados Unidos', 'Canadá', 'Austrália', 'Rússia'], answer: 1, explanation: 'O Canadá tem o litoral mais extenso, com aproximadamente 202.080 km.', difficulty: 'hard' },
   { category: 'Geografia', question: 'Qual é a capital do Egito?', options: ['Alexandria', 'Cairo', 'Luxor', 'Gizé'], answer: 1, explanation: 'O Cairo é a capital e maior cidade do Egito, às margens do rio Nilo.', difficulty: 'easy' },
@@ -280,7 +280,7 @@ const QUESTIONS = [
   { category: 'Geografia', question: 'Quantos países existem na América do Sul?', options: ['10', '12', '13', '14'], answer: 2, explanation: 'São 13 países, incluindo Brasil, Argentina e Chile, mais a Guiana Francesa (território ultramarino francês).', difficulty: 'medium' },
   { category: 'Geografia', question: 'Qual estreito separa a Ásia da América do Norte?', options: ['Gibraltar', 'Bósforo', 'Bering', 'Malaca'], answer: 2, explanation: 'O Estreito de Bering separa a Rússia (Ásia) do Alasca (América do Norte).', difficulty: 'easy' },
   { category: 'Geografia', question: 'Qual capital europeia está situada sobre 14 colinas?', options: ['Roma', 'Praga', 'Lisboa', 'Viena'], answer: 1, explanation: 'Praga, capital da República Tcheca, é conhecida como a "cidade das cem torres" sobre 14 colinas.', difficulty: 'hard' },
-  // === GEOGRAFIA (novas) ===
+  // === GEOGRAFIA ===
   { category: 'Geografia', question: 'Qual país é cortado pela linha do Equador?', options: ['Argentina', 'Brasil', 'Chile', 'Peru'], answer: 1, explanation: 'O Brasil é cortado pela linha do Equador nos estados do Norte e Nordeste.', difficulty: 'easy' },
   { category: 'Geografia', question: 'Qual é a maior ilha do mundo?', options: ['Groelândia', 'Madagascar', 'Ilha de Baffin', 'Sumatra'], answer: 0, explanation: 'A Groelândia tem 2,16 milhões de km², a maior ilha do mundo.', difficulty: 'hard' },
   { category: 'Geografia', question: 'Quantos países fazem fronteira com o Brasil?', options: ['7', '8', '9', '10'], answer: 3, explanation: 'O Brasil faz fronteira com 10 países sul-americanos, exceto Chile e Equador.', difficulty: 'medium' },
@@ -305,7 +305,7 @@ const QUESTIONS = [
   { category: 'Geografia', question: 'Onde está localizada a Grande Barreira de Corais?', options: ['Havaí', 'Austrália', 'Maldivas', 'Caribe'], answer: 1, explanation: 'A Grande Barreira de Corais está na costa nordeste da Austrália.', difficulty: 'medium' },
   { category: 'Geografia', question: 'Qual estreito separa a Europa da África?', options: ['Gibraltar', 'Bósforo', 'Dardanelos', 'Messina'], answer: 0, explanation: 'O Estreito de Gibraltar separa a Espanha (Europa) do Marrocos (África).', difficulty: 'medium' },
   { category: 'Geografia', question: 'Quantas regiões tem o Brasil?', options: ['3', '4', '5', '6'], answer: 2, explanation: 'O Brasil tem 5 regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul.', difficulty: 'easy' },
-  // === CIÊNCIA (existing) ===
+  // === CIÊNCIA ===
   { category: 'Ciência', question: 'Qual a fórmula química da água?', options: ['CO2', 'H2O', 'NaCl', 'O2'], answer: 1, explanation: 'A água é composta por dois átomos de hidrogênio e um de oxigênio.', difficulty: 'easy' },
   { category: 'Ciência', question: 'Qual o osso mais longo do corpo humano?', options: ['Tíbia', 'Fêmur', 'Úmero', 'Coluna'], answer: 1, explanation: 'O fêmur (osso da coxa) é o maior e mais forte, medindo cerca de 50 cm.', difficulty: 'easy' },
   { category: 'Ciência', question: 'Que cientista propôs a teoria da evolução?', options: ['Mendel', 'Charles Darwin', 'Pasteur', 'Newton'], answer: 1, explanation: 'Darwin publicou "A Origem das Espécies" em 1859 com a teoria da seleção natural.', difficulty: 'easy' },
@@ -318,7 +318,7 @@ const QUESTIONS = [
   { category: 'Ciência', question: 'O que a lei de Lavoisier afirma?', options: ['A massa pode ser criada', 'A massa pode ser destruída', 'Na natureza nada se cria, tudo se transforma', 'A massa aumenta em reações'], answer: 2, explanation: 'Lavoisier: "na natureza nada se cria, nada se perde, tudo se transforma".', difficulty: 'hard' },
   { category: 'Ciência', question: 'Quantos litros de sangue tem um adulto?', options: ['2 a 3 L', '4 a 6 L', '7 a 9 L', '10 a 12 L'], answer: 1, explanation: 'Um adulto tem entre 4,5 e 6 litros de sangue, 7-8% do peso corporal.', difficulty: 'hard' },
   { category: 'Ciência', question: 'Qual o menor osso do corpo humano?', options: ['Falange', 'Martelo', 'Estribo', 'Lacrimal'], answer: 2, explanation: 'O estribo, no ouvido médio, mede cerca de 3 mm.', difficulty: 'hard' },
-  // === CIÊNCIA (new) ===
+  // === CIÊNCIA ===
   { category: 'Ciência', question: 'Qual cientista descobriu a penicilina?', options: ['Marie Curie', 'Alexander Fleming', 'Louis Pasteur', 'Robert Koch'], answer: 1, explanation: 'Alexander Fleming descobriu a penicilina em 1928 por acaso, revolucionando a medicina.', difficulty: 'easy' },
   { category: 'Ciência', question: 'O que é a fotossíntese?', options: ['Respiração das plantas', 'Processo de conversão de luz em energia química', 'Absorção de água pelas raízes', 'Reprodução das plantas'], answer: 1, explanation: 'Na fotossíntese, as plantas usam luz, CO2 e água para produzir glicose e oxigênio.', difficulty: 'easy' },
   { category: 'Ciência', question: 'Qual é o maior órgão do corpo humano?', options: ['Fígado', 'Coração', 'Pele', 'Pulmão'], answer: 2, explanation: 'A pele é o maior órgão, com cerca de 2 m² e 15% do peso corporal.', difficulty: 'easy' },
@@ -331,7 +331,7 @@ const QUESTIONS = [
   { category: 'Ciência', question: 'O que são prótons?', options: ['Partículas sem carga no núcleo', 'Partículas com carga positiva no núcleo', 'Partículas com carga negativa orbitando o núcleo', 'Partículas que formam a eletrosfera'], answer: 1, explanation: 'Prótons são partículas subatômicas com carga positiva no núcleo atômico.', difficulty: 'hard' },
   { category: 'Ciência', question: 'Qual cientista é conhecido pela teoria da relatividade?', options: ['Isaac Newton', 'Albert Einstein', 'Stephen Hawking', 'Galileu Galilei'], answer: 1, explanation: 'Einstein publicou a Relatividade Restrita (1905) e Geral (1915), revolucionando a física.', difficulty: 'medium' },
   { category: 'Ciência', question: 'Qual é a função das hemácias no sangue?', options: ['Combater infecções', 'Transportar oxigênio', 'Coagular sangue', 'Produzir hormônios'], answer: 1, explanation: 'Hemácias (glóbulos vermelhos) transportam oxigênio pela hemoglobina.', difficulty: 'hard' },
-  // === CIÊNCIA (novas) ===
+  // === CIÊNCIA ===
   { category: 'Ciência', question: 'Qual a unidade de medida da frequência?', options: ['Newton', 'Hertz', 'Watt', 'Joule'], answer: 1, explanation: 'Hertz (Hz) mede ciclos por segundo, usado para frequência de ondas.', difficulty: 'medium' },
   { category: 'Ciência', question: 'Qual planeta é conhecido como "planeta vermelho"?', options: ['Marte', 'Júpiter', 'Saturno', 'Vênus'], answer: 0, explanation: 'Marte é conhecido como planero vermelho devido ao óxido de ferro em sua superfície.', difficulty: 'easy' },
   { category: 'Ciência', question: 'O que são as placas tectônicas?', options: ['Fragmentos da crosta terrestre que se movem', 'Camadas da atmosfera', 'Partes do núcleo terrestre', 'Estruturas no fundo do oceano'], answer: 0, explanation: 'As placas tectônicas movem-se sobre o manto, causando terremotos e vulcões.', difficulty: 'medium' },
@@ -356,7 +356,7 @@ const QUESTIONS = [
   { category: 'Ciência', question: 'O que é um fóssil?', options: ['Rocha vulcânica', 'Resto ou vestígio de organismo antigo', 'Cristal mineral', 'Fóssil de combustível'], answer: 1, explanation: 'Fósseis são restos ou vestígios de seres vivos preservados em rochas.', difficulty: 'easy' },
   { category: 'Ciência', question: 'Qual a unidade de medida da corrente elétrica?', options: ['Volt', 'Watt', 'Ohm', 'Ampere'], answer: 3, explanation: 'O ampere (A) mede a intensidade da corrente elétrica.', difficulty: 'medium' },
   { category: 'Ciência', question: 'Quantos ossos tem a mão humana?', options: ['19', '24', '27', '32'], answer: 2, explanation: 'A mão humana tem 27 ossos, incluindo falanges, metacarpos e carpos.', difficulty: 'hard' },
-  // === MÚSICA (existing) ===
+  // === MÚSICA ===
   { category: 'Música', question: 'Qual banda é conhecida como "a banda mais famosa do mundo"?', options: ['Rolling Stones', 'Queen', 'The Beatles', 'Led Zeppelin'], answer: 2, explanation: 'The Beatles é considerada a banda mais influente e bem-sucedida da história.', difficulty: 'easy' },
   { category: 'Música', question: 'Quem é o "Rei do Pop"?', options: ['Prince', 'Michael Jackson', 'Elvis Presley', 'Madonna'], answer: 1, explanation: 'Michael Jackson (1958-2009) é o Rei do Pop, com Thriller, o álbum mais vendido.', difficulty: 'easy' },
   { category: 'Música', question: 'Qual instrumento tem teclas brancas e pretas?', options: ['Violão', 'Piano', 'Violino', 'Flauta'], answer: 1, explanation: 'O piano tem 88 teclas que acionam martelos percutindo cordas.', difficulty: 'easy' },
@@ -369,7 +369,7 @@ const QUESTIONS = [
   { category: 'Música', question: 'Qual nota corresponde a 440 Hz?', options: ['Dó', 'Lá', 'Ré', 'Sol'], answer: 1, explanation: 'O Lá (A4) a 440 Hz é o padrão internacional de afinação.', difficulty: 'hard' },
   { category: 'Música', question: 'Quem é a "Rainha do Rock" brasileira?', options: ['Pitty', 'Cazuza', 'Rita Lee', 'Tita Lima'], answer: 2, explanation: 'Rita Lee (1947-2023) é considerada a Rainha do Rock brasileiro.', difficulty: 'medium' },
   { category: 'Música', question: 'Qual o nome do famoso festival de música realizado em Woodstock?', options: ['Woodstock', 'Coachella', 'Glastonbury', 'Lollapalooza'], answer: 0, explanation: 'Woodstock (1969) foi um marco cultural com mais de 400 mil pessoas e atrações como Jimi Hendrix.', difficulty: 'medium' },
-  // === MÚSICA (new) ===
+  // === MÚSICA ===
   { category: 'Música', question: 'Qual cantora brasileira é conhecida como "Rainha do Samba"?', options: ['Elza Soares', 'Beth Carvalho', 'Alcione', 'Clara Nunes'], answer: 2, explanation: 'Alcione é considerada a "Rainha do Samba" com mais de 50 anos de carreira.', difficulty: 'medium' },
   { category: 'Música', question: 'Qual o gênero musical brasileiro criado no Rio de Janeiro nos anos 1950?', options: ['Samba', 'Bossa Nova', 'MPB', 'Forró'], answer: 1, explanation: 'A Bossa Nova surgiu na Zona Sul do Rio com nomes como Tom Jobim e Vinícius de Moraes.', difficulty: 'medium' },
   { category: 'Música', question: 'Quantas sinfonias Beethoven compôs?', options: ['5', '7', '9', '12'], answer: 2, explanation: 'Beethoven compôs 9 sinfonias, sendo a 9ª a mais famosa com o "Hino à Alegria".', difficulty: 'hard' },
@@ -382,7 +382,7 @@ const QUESTIONS = [
   { category: 'Música', question: 'Qual é o maior prêmio da música mundial?', options: ['Oscar', 'Grammy', 'Emmy', 'Tony'], answer: 1, explanation: 'O Grammy Award é o prêmio mais prestigiado da indústria musical desde 1959.', difficulty: 'easy' },
   { category: 'Música', question: 'Qual cantor é conhecido como "O Rei do Rock"?', options: ['Elvis Presley', 'Little Richard', 'Chuck Berry', 'Jerry Lee Lewis'], answer: 0, explanation: 'Elvis Presley (1935-1977) é o "Rei do Rock", um dos maiores ícones culturais.', difficulty: 'easy' },
   { category: 'Música', question: 'Qual ritmo musical típico do Nordeste brasileiro é tocado com sanfona, triângulo e zabumba?', options: ['Samba', 'Forró', 'Maracatu', 'Frevo'], answer: 1, explanation: 'O forró é o ritmo nordestino por excelência, especialmente no São João.', difficulty: 'medium' },
-  // === MÚSICA (novas) ===
+  // === MÚSICA ===
   { category: 'Música', question: 'Qual cantor ficou conhecido como "O Rei do Pop Brasileiro"?', options: ['Roberto Carlos', 'Milton Nascimento', 'Caetano Veloso', 'Djavan'], answer: 0, explanation: 'Roberto Carlos é amplamente chamado de "Rei" da música brasileira.', difficulty: 'easy' },
   { category: 'Música', question: 'Qual banda brasileira cantou "Tempo Perdido"?', options: ['Titãs', 'Legião Urbana', 'Paralamas do Sucesso', 'Capital Inicial'], answer: 1, explanation: 'Legião Urbana lançou "Tempo Perdido" em 1986 no álbum "Dois".', difficulty: 'hard' },
   { category: 'Música', question: 'Quantas cordas tem um violão clássico?', options: ['4', '6', '7', '8'], answer: 1, explanation: 'O violão clássico tem 6 cordas, afinadas em Mi, Lá, Ré, Sol, Si, Mi.', difficulty: 'easy' },
@@ -407,7 +407,7 @@ const QUESTIONS = [
   { category: 'Música', question: 'Qual banda britânica lançou o álbum "The Dark Side of the Moon"?', options: ['Pink Floyd', 'Led Zeppelin', 'Queen', 'The Who'], answer: 0, explanation: 'Pink Floyd lançou "The Dark Side of the Moon" em 1973, um dos álbuns mais vendidos.', difficulty: 'medium' },
   { category: 'Música', question: 'O que é um intervalo musical de oitava?', options: ['A distância entre duas notas com o mesmo nome', 'Oito notas consecutivas', 'Uma pausa de 8 segundos', 'Um acorde de 8 notas'], answer: 0, explanation: 'Uma oitava é a distância entre duas notas de mesma letra com frequência dobrada.', difficulty: 'hard' },
   { category: 'Música', question: 'Qual cantor brasileiro da MPB tem uma canção chamada "Construção"?', options: ['Caetano Veloso', 'Milton Nascimento', 'Chico Buarque', 'Gilberto Gil'], answer: 2, explanation: 'Chico Buarque compôs "Construção" em 1971, uma das mais importantes da MPB.', difficulty: 'medium' },
-  // === CINEMA E TV (existing) ===
+  // === CINEMA E TV ===
   { category: 'Cinema e TV', question: 'Qual filme ganhou o Oscar de Melhor Filme em 2023?', options: ['Tudo em Todo Lugar ao Mesmo Tempo', 'Oppenheimer', 'Barbie', 'Os Fabelmans'], answer: 0, explanation: 'O filme venceu 7 Oscars em 2023, incluindo Melhor Filme.', difficulty: 'hard' },
   { category: 'Cinema e TV', question: 'Quem interpretou o Coringa em "O Cavaleiro das Trevas"?', options: ['Jack Nicholson', 'Heath Ledger', 'Joaquin Phoenix', 'Jared Leto'], answer: 1, explanation: 'Heath Ledger ganhou o Oscar póstumo por sua atuação em 2008.', difficulty: 'medium' },
   { category: 'Cinema e TV', question: 'Qual o filme de maior bilheteria da história?', options: ['Vingadores: Ultimato', 'Avatar', 'Titanic', 'Star Wars: Episódio VII'], answer: 1, explanation: 'Avatar (2009) arrecadou mais de US$ 2,9 bilhões mundialmente.', difficulty: 'medium' },
@@ -420,7 +420,7 @@ const QUESTIONS = [
   { category: 'Cinema e TV', question: 'Quem criou o Universo Cinematográfico Marvel?', options: ['Stan Lee', 'Kevin Feige', 'Jon Favreau', 'Robert Downey Jr.'], answer: 1, explanation: 'Kevin Feige é o presidente da Marvel Studios desde 2008.', difficulty: 'hard' },
   { category: 'Cinema e TV', question: 'Em que ano estreou a série "Friends"?', options: ['1992', '1994', '1996', '1998'], answer: 1, explanation: 'Friends estreou em 22 de setembro de 1994.', difficulty: 'medium' },
   { category: 'Cinema e TV', question: 'Qual novela brasileira é considerada um marco na televisão nacional?', options: ['A Grande Família', 'Toma Lá Dá Cá', 'Sai de Baixo', 'Roque Santeiro'], answer: 3, explanation: 'Roque Santeiro (1985) é uma das novelas mais marcantes da TV brasileira.', difficulty: 'medium' },
-  // === CINEMA E TV (new) ===
+  // === CINEMA E TV ===
   { category: 'Cinema e TV', question: 'Qual filme brasileiro foi indicado ao Oscar de Melhor Filme Estrangeiro em 1999?', options: ['Central do Brasil', 'Cidade de Deus', 'Tropa de Elite', 'O Quatrilho'], answer: 0, explanation: '"Central do Brasil" (1998) de Walter Salles foi indicado ao Oscar de Melhor Filme Estrangeiro.', difficulty: 'hard' },
   { category: 'Cinema e TV', question: 'Quem interpretou o Pantera Negra no filme da Marvel?', options: ['Michael B. Jordan', 'Chadwick Boseman', 'Idris Elba', 'John Boyega'], answer: 1, explanation: 'Chadwick Boseman interpretou TChalla, o Pantera Negra, de 2016 a 2019.', difficulty: 'medium' },
   { category: 'Cinema e TV', question: 'Qual série de TV é conhecida como "a série mais cara já produzida"?', options: ['Game of Thrones', 'Stranger Things', 'The Crown', 'Rings of Power'], answer: 3, explanation: 'O Senhor dos Anéis: Os Anéis de Poder custou cerca de US$ 465 milhões pela 1ª temporada.', difficulty: 'hard' },
@@ -433,7 +433,7 @@ const QUESTIONS = [
   { category: 'Cinema e TV', question: 'Qual é o desenho animado mais longo da televisão brasileira?', options: ['Turma da Mônica', 'Castelo Rá-Tim-Bum', 'Sítio do Picapau Amarelo', 'Cocoricó'], answer: 0, explanation: 'A Turma da Mônica está no ar desde 1976, a série animada mais longa do Brasil.', difficulty: 'medium' },
   { category: 'Cinema e TV', question: 'Qual filme de animação da Disney se passa na França e tem uma protagonista que adora ler?', options: ['A Bela e a Fera', 'A Bela Adormecida', 'Branca de Neve', 'Cinderela'], answer: 0, explanation: 'Bela, de "A Bela e a Fera" (1991), é uma jovem inteligente e apaixonada por livros.', difficulty: 'easy' },
   { category: 'Cinema e TV', question: 'Qual ator interpretou o personagem Walter White em "Breaking Bad"?', options: ['Aaron Paul', 'Bryan Cranston', 'Bob Odenkirk', 'Dean Norris'], answer: 1, explanation: 'Bryan Cranston interpretou Walter White, papel que lhe rendeu 4 Emmys.', difficulty: 'medium' },
-  // === CINEMA E TV (novas) ===
+  // === CINEMA E TV ===
   { category: 'Cinema e TV', question: 'Qual filme ganhou o Oscar de Melhor Filme em 2024?', options: ['Oppenheimer', 'Barbie', 'Pobres Criaturas', 'Assassinos da Lua das Flores'], answer: 0, explanation: 'Oppenheimer venceu 7 Oscars em 2024, incluindo Melhor Filme.', difficulty: 'hard' },
   { category: 'Cinema e TV', question: 'Quem dirigiu "Pulp Fiction"?', options: ['Martin Scorsese', 'Quentin Tarantino', 'Steven Spielberg', 'David Fincher'], answer: 1, explanation: 'Tarantino dirigiu "Pulp Fiction" em 1994, vencedor da Palma de Ouro.', difficulty: 'medium' },
   { category: 'Cinema e TV', question: 'Qual série de TV tem o episódio mais assistido da história?', options: ['Friends', 'Game of Thrones', 'The Big Bang Theory', 'CSI'], answer: 0, explanation: 'O final de "Friends" em 2004 teve 52,5 milhões de telespectadores nos EUA.', difficulty: 'hard' },
@@ -458,7 +458,7 @@ const QUESTIONS = [
   { category: 'Cinema e TV', question: 'Qual filme de Hayao Miyazaki ganhou o Oscar de Animação?', options: ['Meu Amigo Totoro', 'A Viagem de Chihiro', 'Princesa Mononoke', 'O Castelo Animado'], answer: 1, explanation: 'Chihiro venceu o Oscar de Animação em 2003.', difficulty: 'medium' },
   { category: 'Cinema e TV', question: 'Quem apresentou o Oscar de 2024?', options: ['Jimmy Kimmel', 'Jimmy Fallon', 'Steve Harvey', 'John Oliver'], answer: 0, explanation: 'Jimmy Kimmel apresentou o Oscar pela quarta vez em 2024.', difficulty: 'hard' },
   { category: 'Cinema e TV', question: 'Qual ator interpretou Gandalf em "O Senhor dos Anéis"?', options: ['Ian McKellen', 'Christopher Lee', 'Richard Harris', 'Michael Gambon'], answer: 0, explanation: 'Ian McKellen interpretou Gandalf, papel que lhe rendeu indicação ao Oscar.', difficulty: 'easy' },
-  // === ESPORTES (existing) ===
+  // === ESPORTES ===
   { category: 'Esportes', question: 'Em que esporte Pelé se destacou?', options: ['Basquete', 'Futebol', 'Vôlei', 'Natação'], answer: 1, explanation: 'Pelé é considerado o maior jogador de futebol de todos os tempos.', difficulty: 'easy' },
   { category: 'Esportes', question: 'Quantos jogadores tem uma equipe de futebol?', options: ['9', '10', '11', '12'], answer: 2, explanation: 'Cada equipe tem 11 jogadores em campo, incluindo o goleiro.', difficulty: 'easy' },
   { category: 'Esportes', question: 'Qual país sediou as Olimpíadas de 2016?', options: ['Reino Unido', 'China', 'Brasil', 'Japão'], answer: 2, explanation: 'O Rio de Janeiro foi a primeira cidade sul-americana a sediar os Jogos.', difficulty: 'easy' },
@@ -471,7 +471,7 @@ const QUESTIONS = [
   { category: 'Esportes', question: 'Qual país tem mais títulos de Copa do Mundo?', options: ['Alemanha', 'Itália', 'Brasil', 'Argentina'], answer: 2, explanation: 'O Brasil é o maior campeão com 5 títulos (1958, 1962, 1970, 1994, 2002).', difficulty: 'easy' },
   { category: 'Esportes', question: 'Qual a distância oficial de uma maratona?', options: ['21,1 km', '42,195 km', '50 km', '100 km'], answer: 1, explanation: 'A maratona tem 42,195 km desde os Jogos de Londres 1908.', difficulty: 'medium' },
   { category: 'Esportes', question: 'Quantas voltas tem uma corrida de Fórmula 1 em média?', options: ['30 a 40', '50 a 60', '70 a 80', '90 a 100'], answer: 2, explanation: 'GPs de Fórmula 1 têm entre 70 e 80 voltas, com distância total mínima de 305 km.', difficulty: 'hard' },
-  // === ESPORTES (new) ===
+  // === ESPORTES ===
   { category: 'Esportes', question: 'Em quantos esportes diferentes Pelé jogou profissionalmente?', options: ['1', '2', '3', '4'], answer: 0, explanation: 'Pelé jogou apenas futebol profissionalmente, mas também praticou outros esportes.', difficulty: 'easy' },
   { category: 'Esportes', question: 'Qual país sediou a primeira Copa do Mundo de Futebol em 1930?', options: ['Brasil', 'Uruguai', 'Argentina', 'Itália'], answer: 1, explanation: 'A primeira Copa foi no Uruguai, que também foi campeão.', difficulty: 'medium' },
   { category: 'Esportes', question: 'Qual jogador de futebol tem mais Bolas de Ouro?', options: ['Cristiano Ronaldo', 'Messi', 'Pelé', 'Zidane'], answer: 1, explanation: 'Messi tem 8 Bolas de Ouro (2023), o maior número da história.', difficulty: 'medium' },
@@ -484,7 +484,7 @@ const QUESTIONS = [
   { category: 'Esportes', question: 'Qual nadador detém o maior número de medalhas olímpicas?', options: ['Michael Phelps', 'Mark Spitz', 'Ian Thorpe', 'Caeleb Dressel'], answer: 0, explanation: 'Michael Phelps tem 28 medalhas olímpicas (23 de ouro), um recorde absoluto.', difficulty: 'easy' },
   { category: 'Esportes', question: 'Quantos jogadores tem uma equipe de rugby union?', options: ['11', '13', '15', '17'], answer: 2, explanation: 'O rugby union tem 15 jogadores por equipe em campo.', difficulty: 'hard' },
   { category: 'Esportes', question: 'Qual país é o maior vencedor de medalhas olímpicas da história?', options: ['Estados Unidos', 'Rússia', 'Alemanha', 'China'], answer: 0, explanation: 'Os EUA lideram o quadro de medalhas com mais de 2.600 medalhas no total.', difficulty: 'medium' },
-  // === ESPORTES (novas) ===
+  // === ESPORTES ===
   { category: 'Esportes', question: 'Qual o esporte mais praticado no Brasil?', options: ['Futebol', 'Vôlei', 'Basquete', 'Natação'], answer: 0, explanation: 'O futebol é o esporte mais popular e praticado no Brasil.', difficulty: 'easy' },
   { category: 'Esportes', question: 'Quantas medalhas de ouro Michael Phelps tem nas Olimpíadas?', options: ['13', '18', '23', '28'], answer: 2, explanation: 'Phelps tem 23 medalhas de ouro olímpicas, um recorde absoluto.', difficulty: 'hard' },
   { category: 'Esportes', question: 'Em que ano o Brasil foi campeão mundial de futebol pela primeira vez?', options: ['1950', '1958', '1962', '1970'], answer: 1, explanation: 'O Brasil venceu a Suécia na final de 1958 com Pelé de 17 anos.', difficulty: 'medium' },
@@ -509,7 +509,7 @@ const QUESTIONS = [
   { category: 'Esportes', question: 'Qual país é o maior produtor de atletas de MMA?', options: ['Estados Unidos', 'Brasil', 'Rússia', 'Japão'], answer: 1, explanation: 'O Brasil é celeiro de grandes lutadores de MMA como Anderson Silva e Nogueira.', difficulty: 'medium' },
   { category: 'Esportes', question: 'Qual o nome do movimento que Pelé fez famoso?', options: ['Pedalada', 'Chapeu', 'Drible da vaca', 'Elástico'], answer: 0, explanation: 'A pedalada é o drible característico que Pelé popularizou no futebol.', difficulty: 'easy' },
   { category: 'Esportes', question: 'Qual seleção venceu a Copa do Mundo de 2018?', options: ['Alemanha', 'França', 'Bélgica', 'Croácia'], answer: 1, explanation: 'A França venceu a Croácia por 4 a 2 na final da Rússia 2018.', difficulty: 'medium' },
-  // === LITERATURA (existing) ===
+  // === LITERATURA ===
   { category: 'Literatura', question: 'Quem escreveu "Dom Casmurro"?', options: ['José de Alencar', 'Machado de Assis', 'Carlos Drummond', 'Graciliano Ramos'], answer: 1, explanation: 'Machado de Assis publicou Dom Casmurro em 1899.', difficulty: 'easy' },
   { category: 'Literatura', question: 'Qual obra de Shakespeare fala de um príncipe dinamarquês?', options: ['Macbeth', 'Romeu e Julieta', 'Hamlet', 'Otelo'], answer: 2, explanation: 'Hamlet conta a história do príncipe da Dinamarca em busca de vingança.', difficulty: 'medium' },
   { category: 'Literatura', question: 'Que autora escreveu "Harry Potter"?', options: ['J.R.R. Tolkien', 'J.K. Rowling', 'C.S. Lewis', 'Suzanne Collins'], answer: 1, explanation: 'J.K. Rowling escreveu os 7 livros entre 1997 e 2007.', difficulty: 'easy' },
@@ -522,7 +522,7 @@ const QUESTIONS = [
   { category: 'Literatura', question: 'A que gênero pertence "O Alienista"?', options: ['Romance', 'Conto', 'Novela', 'Crônica'], answer: 1, explanation: '"O Alienista" é um conto de Machado de Assis que satiriza a psiquiatria.', difficulty: 'hard' },
   { category: 'Literatura', question: 'Qual obra começa com "Era o melhor dos tempos, era o pior"?', options: ['Oliver Twist', 'Um Conto de Duas Cidades', 'Jane Eyre', 'Moby Dick'], answer: 1, explanation: 'A frase abre "Um Conto de Duas Cidades" de Charles Dickens.', difficulty: 'hard' },
   { category: 'Literatura', question: 'Quem escreveu "As Crônicas de Nárnia"?', options: ['J.K. Rowling', 'C.S. Lewis', 'J.R.R. Tolkien', 'Roald Dahl'], answer: 1, explanation: 'C.S. Lewis escreveu as 7 crônicas entre 1950 e 1956.', difficulty: 'medium' },
-  // === LITERATURA (new) ===
+  // === LITERATURA ===
   { category: 'Literatura', question: 'Quem escreveu "O Pequeno Príncipe"?', options: ['Saint-Exupéry', 'Victor Hugo', 'Jules Verne', 'Albert Camus'], answer: 0, explanation: 'Antoine de Saint-Exupéry publicou "O Pequeno Príncipe" em 1943.', difficulty: 'easy' },
   { category: 'Literatura', question: 'Qual é a obra mais famosa de Jorge Amado?', options: ['Capitães da Areia', 'Gabriela, Cravo e Canela', 'Dona Flor e Seus Dois Maridos', 'Tenda dos Milagres'], answer: 1, explanation: '"Gabriela, Cravo e Canela" (1958) é a obra mais conhecida de Jorge Amado.', difficulty: 'medium' },
   { category: 'Literatura', question: 'Qual poeta brasileiro é autor de "No Meio do Caminho Tinha uma Pedra"?', options: ['Carlos Drummond de Andrade', 'Manuel Bandeira', 'João Cabral de Melo Neto', 'Mário de Andrade'], answer: 0, explanation: 'Drummond publicou o poema em seu livro "Alguma Poesia" (1930).', difficulty: 'hard' },
@@ -535,7 +535,7 @@ const QUESTIONS = [
   { category: 'Literatura', question: 'Qual livro detém o recorde de livro mais vendido de todos os tempos (excluindo textos religiosos)?', options: ['O Pequeno Príncipe', 'Dom Quixote', 'Um Conto de Duas Cidades', 'O Senhor dos Anéis'], answer: 0, explanation: 'O Pequeno Príncipe vendeu mais de 200 milhões de cópias mundialmente.', difficulty: 'hard' },
   { category: 'Literatura', question: 'Em que século viveu o escritor português Luís de Camões?', options: ['XIV', 'XV', 'XVI', 'XVII'], answer: 2, explanation: 'Camões (c. 1524-1580) viveu no século XVI, época das grandes navegações.', difficulty: 'easy' },
   { category: 'Literatura', question: 'Qual personagem famosa de Monteiro Lobato vive no Sítio do Picapau Amarelo?', options: ['Emília', 'Narizinho', 'Pedrinho', 'Dona Benta'], answer: 0, explanation: 'Emília, a boneca de pano falante, é a personagem mais icônica de Lobato.', difficulty: 'easy' },
-  // === LITERATURA (novas) ===
+  // === LITERATURA ===
   { category: 'Literatura', question: 'Quem escreveu "O Cortiço"?', options: ['Machado de Assis', 'Aluísio Azevedo', 'José de Alencar', 'Raul Pompéia'], answer: 1, explanation: 'Aluísio Azevedo publicou "O Cortiço" em 1890, obra do Naturalismo brasileiro.', difficulty: 'hard' },
   { category: 'Literatura', question: 'Qual a obra mais famosa de Gabriel García Márquez?', options: ['Cem Anos de Solidão', 'O Amor nos Tempos do Cólera', 'Crônica de uma Morte Anunciada', 'O Outono do Patriarca'], answer: 0, explanation: 'Cem Anos de Solidão (1967) é considerada a obra-prima do realismo mágico.', difficulty: 'hard' },
   { category: 'Literatura', question: 'O que é uma crônica?', options: ['Poema de 14 versos', 'Texto narrativo curto sobre o cotidiano', 'Peça de teatro', 'Ensaio científico'], answer: 1, explanation: 'A crônica é um texto breve que comenta fatos do dia a dia com tom pessoal.', difficulty: 'easy' },
@@ -572,7 +572,7 @@ const QUESTIONS = [
   { category: 'Conhecimentos Gerais', question: 'Onde fica a sede do Google?', options: ['Mountain View', 'Seattle', 'Nova York', 'San Francisco'], answer: 0, explanation: 'O Googleplex fica em Mountain View, Califórnia.', difficulty: 'hard' },
   { category: 'Conhecimentos Gerais', question: 'Qual o prazo de validade de um ovo cozido na geladeira?', options: ['2 dias', '7 dias', '14 dias', '30 dias'], answer: 1, explanation: 'Ovos cozidos duram até 7 dias na geladeira com casca intacta.', difficulty: 'hard' },
   { category: 'Conhecimentos Gerais', question: 'Em qual país fica a sede do Museu do Louvre?', options: ['Itália', 'França', 'Espanha', 'Inglaterra'], answer: 1, explanation: 'O Louvre está em Paris, França, e é o maior museu de arte do mundo.', difficulty: 'easy' },
-  // === CONHECIMENTOS GERAIS (new) ===
+  // === CONHECIMENTOS GERAIS ===
   { category: 'Conhecimentos Gerais', question: 'Quantos ossos tem o crânio humano?', options: ['12', '22', '30', '8'], answer: 1, explanation: 'O crânio humano adulto é composto por 22 ossos, incluindo mandíbula e face.', difficulty: 'hard' },
   { category: 'Conhecimentos Gerais', question: 'Qual é a maior ilha do mundo?', options: ['Groenlândia', 'Madagascar', 'Bornéu', 'Nova Guiné'], answer: 0, explanation: 'A Groenlândia tem 2,16 milhões de km², a maior ilha não continental.', difficulty: 'medium' },
   { category: 'Conhecimentos Gerais', question: 'O que significa a sigla OMS?', options: ['Organização Mundial da Saúde', 'Ordem Médica Suprema', 'Órgão Mundial Sanitário', 'Organização Médica Social'], answer: 0, explanation: 'A OMS é uma agência da ONU fundada em 1948 para saúde global.', difficulty: 'easy' },
@@ -585,7 +585,7 @@ const QUESTIONS = [
   { category: 'Conhecimentos Gerais', question: 'Qual a capital do estado de São Paulo?', options: ['Campinas', 'São Paulo', 'Santos', 'São José dos Campos'], answer: 1, explanation: 'São Paulo é a capital do estado homônimo e a maior cidade do Brasil.', difficulty: 'easy' },
   { category: 'Conhecimentos Gerais', question: 'O que significa a sigla CF em direito constitucional brasileiro?', options: ['Código Fiscal', 'Constituição Federal', 'Câmara Federal', 'Conselho Fiscal'], answer: 1, explanation: 'CF é a sigla para Constituição Federal de 1988.', difficulty: 'hard' },
   { category: 'Conhecimentos Gerais', question: 'Qual a maior bacia hidrográfica do mundo?', options: ['Bacia do Congo', 'Bacia do Amazonas', 'Bacia do Mississippi', 'Bacia do Nilo'], answer: 1, explanation: 'A Bacia Amazônica é a maior, com cerca de 7 milhões de km².', difficulty: 'medium' },
-  // === CONHECIMENTOS GERAIS (novas) ===
+  // === CONHECIMENTOS GERAIS ===
   { category: 'Conhecimentos Gerais', question: 'O que significa a sigla IBGE?', options: ['Instituto Brasileiro de Geografia e Estatística', 'Instituto de Biologia Geral do Estado', 'Índice Brasileiro de Gestão Empresarial', 'Instituto de Bem-Estar Social'], answer: 0, explanation: 'O IBGE é o principal órgão de estatística do Brasil, fundado em 1934.', difficulty: 'medium' },
   { category: 'Conhecimentos Gerais', question: 'Qual a nacionalidade de Che Guevara?', options: ['Cubana', 'Argentina', 'Boliviana', 'Mexicana'], answer: 1, explanation: 'Che Guevara nasceu em Rosário, Argentina, em 1928.', difficulty: 'hard' },
   { category: 'Conhecimentos Gerais', question: 'Quantas horas tem um dia?', options: ['12', '24', '36', '48'], answer: 1, explanation: 'Um dia tem 24 horas, período da rotação da Terra.', difficulty: 'easy' },
