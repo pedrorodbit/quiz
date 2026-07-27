@@ -11,9 +11,20 @@ Gerador de páginas de perguntas e respostas estilo Perguntados, otimizado para 
 
 ## Categorias (12)
 
-Arte e Cultura | Astronomia | Gastronomia | Tecnologia | História | Geografia | Ciência | Música | Cinema e TV | Esportes | Literatura | Conhecimentos Gerais
+- Arte e Cultura
+- Astronomia
+- Gastronomia
+- Tecnologia
+- História
+- Geografia
+- Ciência
+- Música
+- Cinema e TV
+- Esportes
+- Literatura
+- Conhecimentos Gerais
 
-144 questões no total (12 por categoria), com níveis Fácil, Médio e Difícil.
+288 questões no total (24 por categoria), com níveis Fácil, Médio e Difícil.
 
 ## Como usar
 
