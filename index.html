@@ -194,6 +194,7 @@
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
       border-bottom: none;
+      page-break-after: always;
     }
     .card { border-color: #000; border-width: 1.5px; }
     .card-header { border-bottom-color: #000; }
@@ -435,6 +436,7 @@ async function downloadPDF() {
   for (var i = 0; i < pages.length; i++) {
     var clone = pages[i].cloneNode(true);
     clone.style.margin = '0';
+    clone.style.position = 'static';
     temp.appendChild(clone);
     var canvas = await html2canvas(clone, {
       scale: 2,
