@@ -1,41 +1,41 @@
 # Quiz Perguntados - Gerador para Impressão
 
-Gerador de páginas de perguntas e respostas estilo Perguntados, otimizado para impressão em folha A4.
+Gerador de páginas de perguntas e respostas estilo Perguntados, otimizado para impressão em folha A4 e download de PDF.
 
 ## Formato
 
-- A4 (210 x 297 mm)
-- 6 questões por folha (2 colunas x 3 linhas)
-- Preto e branco, limpo para impressão
+- A4 (210 × 297 mm), 6 questões por folha (2 colunas × 3 linhas)
 - Cada questão contém: categoria, pergunta, 4 alternativas, resposta e explicação
+- PDF gerado via html2canvas + jsPDF (sem necessidade de impressora)
 
-## Categorias (12)
+## Banco de Questões
 
-- Arte e Cultura
-- Astronomia
-- Gastronomia
-- Tecnologia
-- História
-- Geografia
-- Ciência
-- Música
-- Cinema e TV
-- Esportes
-- Literatura
-- Conhecimentos Gerais
+**576 questões** no total, distribuídas em **12 categorias** com **48 questões cada**:
 
-288 questões no total (24 por categoria), com níveis Fácil, Médio e Difícil.
+| Categoria | Fácil | Médio | Difícil |
+|---|---|---|---|
+| Arte e Cultura | 16 | 16 | 16 |
+| Astronomia | 16 | 16 | 16 |
+| Gastronomia | 15 | 17 | 16 |
+| Tecnologia | 16 | 16 | 16 |
+| História | 14 | 16 | 18 |
+| Geografia | 16 | 18 | 14 |
+| Ciência | 16 | 17 | 15 |
+| Música | 13 | 19 | 16 |
+| Cinema e TV | 16 | 16 | 16 |
+| Esportes | 16 | 16 | 16 |
+| Literatura | 16 | 16 | 16 |
+| Conhecimentos Gerais | 16 | 16 | 16 |
 
 ## Como usar
 
 1. Abra `index.html` no navegador
-2. Marque/desmarque categorias desejadas
-3. Ajuste a quantidade de questões por categoria
+2. Marque/desmarque as categorias desejadas
+3. Ajuste o total de questões (distribuição proporcional automática)
 4. Clique em **Gerar Páginas** para visualizar
-5. Clique em **Baixar PDF** para gerar PDF exato A4
-6. Ou clique em **Imprimir** para impressão direta
+5. Clique em **Baixar PDF** para gerar o arquivo PDF exato A4
 
-Não há dependências externas além da biblioteca html2pdf.js carregada via CDN.
+Dependências: html2canvas e jsPDF carregados via CDN.
 
 ## Online
 
