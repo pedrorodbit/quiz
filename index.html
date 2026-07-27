@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Perguntados - Gerador de Questões</title>
+<style>
+  @page {
+    size: A4;
+    margin: 12mm 10mm;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Arial', 'Helvetica', sans-serif;
+    font-size: 9pt;
+    color: #000;
+    background: #e8e8e8;
+    padding: 10px;
+  }
+
+  .toolbar {
+    max-width: 210mm;
+    margin: 0 auto 12px;
+    text-align: center;
+  }
+
+  .toolbar button {
+    font-size: 13pt;
+    padding: 10px 32px;
+    cursor: pointer;
+    background: #1a5bb5;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  .toolbar button:hover { background: #0e3d7a; }
+
+  .toolbar .info {
+    display: inline-block;
+    margin-left: 16px;
+    font-size: 11pt;
+    color: #555;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 20px;
+    padding: 10mm 8mm;
+    background: #fff;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5mm;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    page-break-after: always;
+  }
+
+  .card {
+    border: 1.2px solid #222;
+    border-radius: 4px;
+    padding: 4mm 4.5mm;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    break-inside: avoid;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 2.5mm;
+    padding-bottom: 1.5mm;
+    border-bottom: 1.5px solid #444;
+  }
+
+  .card-category {
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #1a3a6b;
+    line-height: 1.2;
+  }
+
+  .card-difficulty {
+    font-size: 7pt;
+    margin-left: auto;
+    padding: 1px 7px;
+    border: 1px solid #555;
+    border-radius: 3px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .card-question {
+    font-size: 9.5pt;
+    font-weight: 700;
+    margin-bottom: 2mm;
+    line-height: 1.35;
+    color: #000;
+  }
+
+  .card-options {
+    list-style: none;
+    margin-bottom: 2mm;
+  }
+
+  .card-options li {
+    font-size: 8.5pt;
+    line-height: 1.5;
+    padding: 0.3mm 0 0.3mm 0;
+    color: #111;
+  }
+
+  .card-answer {
+    margin-top: auto;
+    padding-top: 1.5mm;
+    border-top: 1.2px dashed #888;
+  }
+
+  .card-answer .correct {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: #005a1e;
+    margin-bottom: 0.8mm;
+  }
+
+  .card-answer .explanation {
+    font-size: 7.5pt;
+    line-height: 1.35;
+    color: #333;
+  }
+
+  .card-answer .explanation strong {
+    font-weight: 700;
+    color: #000;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .toolbar { display: none; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      padding: 10mm 8mm;
+    }
+    .card { border-color: #000; }
+    .card-header { border-bottom-color: #000; }
+    .card-answer { border-top-color: #666; }
+    .card-difficulty { border-color: #000; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="generatePage()">Nova Página</button>
+  <button onclick="window.print()" style="background:#2a7a2a;">Imprimir</button>
+  <span class="info" id="pageCount">Página 1</span>
+</div>
+
+<div id="container"></div>
+
+<script>
+const DIFFICULTIES = {
+  easy: { label: 'Fácil', icon: '🟢' },
+  medium: { label: 'Médio', icon: '🟡' },
+  hard: { label: 'Difícil', icon: '🔴' },
+};
+
+const QUESTIONS = [
+  // === ARTE E CULTURA ===
+  {
+    category: 'Arte e Cultura',
+    question: 'Quem pintou o teto da Capela Sistina?',
+    options: ['Leonardo da Vinci', 'Michelangelo', 'Rafael', 'Donatello'],
+    answer: 1,
+    explanation: 'Michelangelo pintou o teto da Capela Sistina entre 1508 e 1512, a pedido do Papa Júlio II.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Arte e Cultura',
+    question: 'Qual é o livro mais vendido da história, excluindo textos religiosos?',
+    options: ['Dom Quixote', 'O Pequeno Príncipe', 'Um Conto de Duas Cidades', 'O Senhor dos Anéis'],
+    answer: 0,
+    explanation: 'Dom Quixote, de Miguel de Cervantes, é considerado o livro mais vendido da história com mais de 500 milhões de cópias.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Arte e Cultura',
+    question: 'Quem escreveu a peça "Romeu e Julieta"?',
+    options: ['Charles Dickens', 'William Shakespeare', 'Machado de Assis', 'Jane Austen'],
+    answer: 1,
+    explanation: 'William Shakespeare escreveu Romeu e Julieta por volta de 1595, uma das histórias de amor mais famosas do mundo.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Arte e Cultura',
+    question: 'Qual movimento artístico é conhecido pelo uso de figuras geométricas e formas abstratas?',
+    options: ['Barroco', 'Renascimento', 'Cubismo', 'Romantismo'],
+    answer: 2,
+    explanation: 'O Cubismo, iniciado por Picasso e Braque, fragmenta figuras em formas geométricas, representando múltiplos ângulos simultaneamente.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Arte e Cultura',
+    question: 'Qual foi o primeiro filme a ganhar o Oscar de Melhor Filme?',
+    options: ['Wings (Asas)', 'O Cantor de Jazz', 'Casablanca', 'E o Vento Levou'],
+    answer: 0,
+    explanation: 'Wings (1927) foi o primeiro filme a vencer o Oscar de Melhor Filme (então chamado de "Produção Destacada") em 1929.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Arte e Cultura',
+    question: 'No Brasil, qual destes é considerado o patrono da independência literária?',
+    options: ['José de Alencar', 'Machado de Assis', 'Gonçalves Dias', 'Olavo Bilac'],
+    answer: 1,
+    explanation: 'Machado de Assis (1839-1908) é considerado o maior nome da literatura brasileira, fundador da Academia Brasileira de Letras.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Arte e Cultura',
+    question: 'Qual artista é conhecido por suas esculturas de figuras humanas em poses dramáticas, como "O Pensador"?',
+    options: ['Auguste Rodin', 'Antonio Canova', 'Michelangelo', 'Donatello'],
+    answer: 0,
+    explanation: 'Auguste Rodin (1840-1917) criou "O Pensador" e outras esculturas marcantes como "O Beijo" e "Os Burgueses de Calais".',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Arte e Cultura',
+    question: 'Em que ano ocorreu a Semana de Arte Moderna no Brasil?',
+    options: ['1918', '1920', '1922', '1924'],
+    answer: 2,
+    explanation: 'A Semana de Arte Moderna aconteceu em fevereiro de 1922 no Teatro Municipal de São Paulo, marco do Modernismo brasileiro.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Arte e Cultura',
+    question: 'Quem pintou "A Noite Estrelada"?',
+    options: ['Claude Monet', 'Vincent van Gogh', 'Pablo Picasso', 'Edvard Munch'],
+    answer: 1,
+    explanation: 'Van Gogh pintou "A Noite Estrelada" em 1889 durante sua internação no asilo de Saint-Rémy-de-Provence.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Arte e Cultura',
+    question: 'Qual instrumento é símbolo da música nordestina brasileira e tem origem européia?',
+    options: ['Berimbau', 'Sanfona', 'Afoxé', 'Cuíca'],
+    answer: 1,
+    explanation: 'A sanfona (acordeão) é um instrumento de origem europeia, mas tornou-se símbolo da música nordestina, especialmente no forró e baião.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Arte e Cultura',
+    question: 'Na arquitetura grega, qual é a ordem caracterizada por colunas simples e sem base?',
+    options: ['Dórica', 'Jônica', 'Coríntia', 'Toscana'],
+    answer: 0,
+    explanation: 'A ordem Dórica é a mais antiga e simples, com colunas sem base e capitel simples, como no Partenon em Atenas.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Arte e Cultura',
+    question: 'Quem escreveu "Grande Sertão: Veredas"?',
+    options: ['Guimarães Rosa', 'Clarice Lispector', 'Graciliano Ramos', 'Jorge Amado'],
+    answer: 0,
+    explanation: 'Guimarães Rosa publicou "Grande Sertão: Veredas" em 1956, considerada uma das obras-primas da literatura brasileira.',
+    difficulty: 'hard',
+  },
+
+  // === ASTRONOMIA ===
+  {
+    category: 'Astronomia',
+    question: 'Qual o planeta mais próximo do Sol?',
+    options: ['Vênus', 'Mercúrio', 'Terra', 'Marte'],
+    answer: 1,
+    explanation: 'Mercúrio é o planeta mais próximo do Sol, a uma distância média de 57,9 milhões de quilômetros.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Astronomia',
+    question: 'Quantas luas tem Marte?',
+    options: ['1', '2', '3', 'Nenhuma'],
+    answer: 1,
+    explanation: 'Marte possui duas luas: Fobos (medo) e Deimos (pânico), descobertas em 1877 por Asaph Hall.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Astronomia',
+    question: 'O que é um buraco negro?',
+    options: [
+      'Uma estrela que explodiu',
+      'Uma região onde a gravidade impede até a luz de escapar',
+      'Um planeta sem atmosfera',
+      'Uma nuvem de poeira interestelar',
+    ],
+    answer: 1,
+    explanation: 'Um buraco negro é uma região do espaço com gravidade tão intensa que nada, nem mesmo a luz, consegue escapar.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Astronomia',
+    question: 'Qual destes é o maior planeta do Sistema Solar?',
+    options: ['Saturno', 'Netuno', 'Júpiter', 'Urano'],
+    answer: 2,
+    explanation: 'Júpiter é o maior planeta, com diâmetro de 142.984 km — mais de 11 vezes o diâmetro da Terra.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Astronomia',
+    question: 'Qual o nome da galáxia mais próxima da Via Láctea?',
+    options: ['Andrômeda', 'Sombreiro', 'Triângulo', 'Olho Negro'],
+    answer: 0,
+    explanation: 'A galáxia de Andrômeda (M31) está a cerca de 2,5 milhões de anos-luz da Terra e é a maior galáxia do Grupo Local.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Astronomia',
+    question: 'Quanto tempo a luz do Sol leva para chegar à Terra?',
+    options: ['Cerca de 8 minutos', 'Cerca de 1 hora', 'Cerca de 1 dia', 'Cerca de 1 segundo'],
+    answer: 0,
+    explanation: 'A luz solar leva aproximadamente 8 minutos e 20 segundos para percorrer os 149,6 milhões de km até a Terra.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Astronomia',
+    question: 'Qual destes planetas tem a maior temperatura média?',
+    options: ['Mercúrio', 'Vênus', 'Marte', 'Júpiter'],
+    answer: 1,
+    explanation: 'Vênus atinge 462°C na superfície devido ao efeito estufa descontrolado, sendo mais quente que Mercúrio, que enfrenta o Sol diretamente.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Astronomia',
+    question: 'Qual é o nome da estrela mais brilhante no céu noturno?',
+    options: ['Betelgeuse', 'Sirius', 'Vega', 'Polaris'],
+    answer: 1,
+    explanation: 'Sirius (Alpha Canis Majoris) é a estrela mais brilhante do céu noturno, com magnitude aparente de -1,46.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Astronomia',
+    question: 'O que define um planeta anão?',
+    options: [
+      'Ser menor que a Lua',
+      'Não ter limpado sua órbita de detritos',
+      'Não ter atmosfera',
+      'Girar no sentido contrário',
+    ],
+    answer: 1,
+    explanation: 'Segundo a IAU (2006), um planeta anão orbita o Sol, tem massa suficiente para forma esférica, mas não limpou sua vizinhança orbital.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Astronomia',
+    question: 'Quantas estrelas existem aproximadamente na Via Láctea?',
+    options: ['100 milhões', '1 bilhão', '100 bilhões', '1 trilhão'],
+    answer: 2,
+    explanation: 'A Via Láctea contém entre 100 e 400 bilhões de estrelas, embora o número exato seja difícil de determinar.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Astronomia',
+    question: 'Qual a principal diferença entre meteoro e meteorito?',
+    options: [
+      'Tamanho e cor',
+      'Meteoro está no espaço; meteorito caiu na Terra',
+      'Não há diferença',
+      'Meteorito é mais brilhante',
+    ],
+    answer: 1,
+    explanation: 'Meteoro é o fenômeno luminoso na atmosfera (estrela cadente). Meteorito é o fragmento que atinge o solo.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Astronomia',
+    question: 'Em que ano o homem pisou na Lua pela primeira vez?',
+    options: ['1965', '1967', '1969', '1971'],
+    answer: 2,
+    explanation: 'Em 20 de julho de 1969, Neil Armstrong foi o primeiro humano a pisar na Lua durante a missão Apollo 11.',
+    difficulty: 'easy',
+  },
+
+  // === GASTRONOMIA ===
+  {
+    category: 'Gastronomia',
+    question: 'Qual país é o maior produtor de café do mundo?',
+    options: ['Colômbia', 'Vietnã', 'Brasil', 'Etiópia'],
+    answer: 2,
+    explanation: 'O Brasil é o maior produtor e exportador de café do mundo, responsável por cerca de um terço da produção global.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Gastronomia',
+    question: 'Qual destes é um prato típico da culinária peruana?',
+    options: ['Paella', 'Ceviche', 'Arepa', 'Tacos'],
+    answer: 1,
+    explanation: 'O ceviche é um prato peruano tradicional à base de peixe cru "cozido" no suco de limão, com cebola, pimenta e coentro.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Gastronomia',
+    question: 'Que ingrediente é essencial para fazer pão?',
+    options: ['Ovos', 'Manteiga', 'Fermento', 'Açúcar'],
+    answer: 2,
+    explanation: 'O fermento é essencial para o crescimento da massa do pão, produzindo gás carbônico que faz a massa expandir.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Gastronomia',
+    question: 'Qual destes é um queijo de origem francesa?',
+    options: ['Gouda', 'Parmesão', 'Feta', 'Brie'],
+    answer: 3,
+    explanation: 'O Brie é um queijo francês macio e cremoso da região de Île-de-France, conhecido por sua casca branca comestível.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Gastronomia',
+    question: 'O que é "umami"?',
+    options: [
+      'Um tempero japonês',
+      'O quinto gosto básico do paladar',
+      'Um tipo de fermentação',
+      'Uma técnica de corte',
+    ],
+    answer: 1,
+    explanation: 'Umami é o quinto gosto básico (além do doce, salgado, azedo e amargo), descoberto pelo cientista Kikunae Ikeda em 1908.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Gastronomia',
+    question: 'Qual é o ingrediente principal do guacamole?',
+    options: ['Tomate', 'Abacate', 'Cebola', 'Pimentão'],
+    answer: 1,
+    explanation: 'Guacamole é uma preparação mexicana feita à base de abacate amassado com limão, cebola, tomate, coentro e sal.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Gastronomia',
+    question: 'Qual tipo de vinho é produzido na região de Bordeaux?',
+    options: ['Vinho do Porto', 'Vinho tinto', 'Champanhe', 'Vinho branco doce'],
+    answer: 1,
+    explanation: 'Bordeaux, na França, produz vinhos tintos mundialmente famosos, feitos principalmente com uvas Cabernet Sauvignon e Merlot.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Gastronomia',
+    question: 'O que significa "al dente" no preparo de massas?',
+    options: ['Muito cozido', 'Ao ponto, firme à mordida', 'Cru por dentro', 'Com molho'],
+    answer: 1,
+    explanation: '"Al dente" (ao dente, em italiano) descreve a massa cozida no ponto ideal: firme ao morder, mas não dura.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Gastronomia',
+    question: 'Qual destes é um método de cocção a seco?',
+    options: ['Cozer', 'Assar', 'Pochar', 'Brasear'],
+    answer: 1,
+    explanation: 'Assar é um método de cocção a seco que utiliza ar quente para cozinhar os alimentos, diferentemente de cozer ou pochar que usam líquido.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Gastronomia',
+    question: 'De qual país é originária a pizza?',
+    options: ['Espanha', 'França', 'Itália', 'Grécia'],
+    answer: 2,
+    explanation: 'A pizza moderna é originária de Nápoles, Itália, onde a pizza Margherita foi criada em homenagem à rainha Margherita em 1889.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Gastronomia',
+    question: 'Qual especiaria é obtida da casca de uma árvore?',
+    options: ['Cravo', 'Canela', 'Noz-moscada', 'Gengibre'],
+    answer: 1,
+    explanation: 'A canela é obtida da casca interna de árvores do gênero Cinnamomum, seca em rolos chamados de "paus de canela".',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Gastronomia',
+    question: 'Que fermentado brasileiro é destilado da cana-de-açúcar?',
+    options: ['Cachaça', 'Rum', 'Vodka', 'Saquê'],
+    answer: 0,
+    explanation: 'A cachaça é uma aguardente brasileira feita da fermentação e destilação do caldo de cana-de-açúcar, base da caipirinha.',
+    difficulty: 'easy',
+  },
+
+  // === TECNOLOGIA ===
+  {
+    category: 'Tecnologia',
+    question: 'O que significa a sigla HTML?',
+    options: [
+      'HyperText Markup Language',
+      'High Tech Modern Language',
+      'Home Tool Markup Language',
+      'Hyper Transfer Markup Language',
+    ],
+    answer: 0,
+    explanation: 'HTML (HyperText Markup Language) é a linguagem de marcação padrão para criar páginas web.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Tecnologia',
+    question: 'O que é um algoritmo de machine learning supervisionado?',
+    options: [
+      'Aprende com dados não rotulados',
+      'Aprende com dados rotulados para fazer previsões',
+      'Não precisa de dados para treinar',
+      'Utiliza apenas regras fixas',
+    ],
+    answer: 1,
+    explanation: 'Aprendizado supervisionado usa dados rotulados (entrada-saída conhecida) para treinar o modelo a fazer previsões ou classificações.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Tecnologia',
+    question: 'Qual linguagem é usada para estilizar páginas web?',
+    options: ['HTML', 'CSS', 'JavaScript', 'SQL'],
+    answer: 1,
+    explanation: 'CSS é a linguagem responsável pela aparência das páginas web, controlando cores, fontes, espaçamentos e layouts.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Tecnologia',
+    question: 'O que é um banco de dados NoSQL?',
+    options: [
+      'Banco que não usa SQL',
+      'Banco que armazena dados sem esquema fixo',
+      'Banco relacional sem tabelas',
+      'Banco exclusivo para gráficos',
+    ],
+    answer: 1,
+    explanation: 'NoSQL refere-se a bancos de dados não relacionais que oferecem flexibilidade de esquema, ideais para dados não estruturados.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Tecnologia',
+    question: 'Qual a função do sistema operacional?',
+    options: [
+      'Navegar na internet',
+      'Gerenciar hardware e software do computador',
+      'Editar imagens',
+      'Compilar programas',
+    ],
+    answer: 1,
+    explanation: 'O sistema operacional gerencia os recursos do computador (hardware, memória, processos) e fornece uma interface para o usuário.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Tecnologia',
+    question: 'O que é um ataque DDoS?',
+    options: [
+      'Roubo de dados criptografados',
+      'Ataque que sobrecarrega um servidor com tráfego',
+      'Vírus que apaga arquivos',
+      'Injeção de SQL',
+    ],
+    answer: 1,
+    explanation: 'DDoS (Distributed Denial of Service) inunda um servidor com requisições de múltiplas fontes, tornando-o indisponível.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Tecnologia',
+    question: 'Qual linguagem de programação é conhecida como a "linguagem das internet"?',
+    options: ['Python', 'Java', 'JavaScript', 'C++'],
+    answer: 2,
+    explanation: 'JavaScript é a linguagem de programação mais usada na web, essencial para criar interatividade em páginas e aplicações web.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Tecnologia',
+    question: 'O que significa a sigla API?',
+    options: [
+      'Application Programming Interface',
+      'Automated Program Integration',
+      'Advanced Protocol Interface',
+      'Application Process Integration',
+    ],
+    answer: 0,
+    explanation: 'API (Interface de Programação de Aplicações) permite que diferentes softwares se comuniquem e troquem dados entre si.',
+    difficulty: 'medium',
+  },
+  {
+    category: 'Tecnologia',
+    question: 'Qual protocolo é usado para enviar emails?',
+    options: ['FTP', 'HTTP', 'SMTP', 'TCP'],
+    answer: 2,
+    explanation: 'SMTP (Simple Mail Transfer Protocol) é o protocolo padrão para envio de emails entre servidores e desta para o servidor de destino.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Tecnologia',
+    question: 'Quantos bits tem um byte?',
+    options: ['4', '8', '16', '32'],
+    answer: 1,
+    explanation: 'Um byte é composto por 8 bits, sendo a unidade básica de armazenamento em computação.',
+    difficulty: 'easy',
+  },
+  {
+    category: 'Tecnologia',
+    question: 'Qual é o modelo de dados mais utilizado em aplicações modernas para escalabilidade horizontal?',
+    options: ['Relacional', 'Documento', 'Chave-valor', 'Grafo'],
+    answer: 0,
+    explanation: 'Bancos relacionais como PostgreSQL continuam amplamente usados, mas modelos NoSQL como documento (MongoDB) ganham espaço para escalabilidade.',
+    difficulty: 'hard',
+  },
+  {
+    category: 'Tecnologia',
+    question: 'O que faz o comando "git commit"?',
+    options: [
+      'Baixa alterações do repositório remoto',
+      'Salva um snapshot das alterações no repositório local',
+      'Envia alterações para o servidor',
+      'Cria um novo repositório',
+    ],
+    answer: 1,
+    explanation: 'git commit cria um ponto de salvamento (snapshot) das alterações no repositório Git local, com uma mensagem descritiva.',
+    difficulty: 'medium',
+  },
+];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function pick(items, n) {
+  return shuffle([...items]).slice(0, n);
+}
+
+const LETTERS = ['A', 'B', 'C', 'D'];
+
+let pageNumber = 0;
+
+function generatePage() {
+  pageNumber++;
+  document.getElementById('pageCount').textContent = `Página ${pageNumber}`;
+
+  const selected = pick(QUESTIONS, 6);
+  const container = document.getElementById('container');
+
+  const page = document.createElement('div');
+  page.className = 'page';
+
+  selected.forEach(q => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const diff = DIFFICULTIES[q.difficulty];
+
+    const header = document.createElement('div');
+    header.className = 'card-header';
+    header.innerHTML = `
+      <span class="card-category">${q.category}</span>
+      <span class="card-difficulty">${diff.label}</span>
+    `;
+
+    const question = document.createElement('div');
+    question.className = 'card-question';
+    question.textContent = q.question;
+
+    const options = document.createElement('ul');
+    options.className = 'card-options';
+    q.options.forEach((opt, idx) => {
+      const li = document.createElement('li');
+      li.textContent = `${LETTERS[idx]}) ${opt}`;
+      options.appendChild(li);
+    });
+
+    const answer = document.createElement('div');
+    answer.className = 'card-answer';
+    const isCorrect = '✅';
+    answer.innerHTML = `
+      <div class="correct">${isCorrect} ${LETTERS[q.answer]}) ${q.options[q.answer]}</div>
+      <div class="explanation"><strong>Explicação:</strong> ${q.explanation}</div>
+    `;
+
+    card.appendChild(header);
+    card.appendChild(question);
+    card.appendChild(options);
+    card.appendChild(answer);
+    page.appendChild(card);
+  });
+
+  container.innerHTML = '';
+  container.appendChild(page);
+
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener('DOMContentLoaded', generatePage);
+</script>
+</body>
+</html>
