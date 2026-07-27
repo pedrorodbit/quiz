@@ -273,9 +273,9 @@
   </div>
   <div class="cat-grid" id="catGrid"></div>
   <div class="total-bar">
-    <label for="totalInput">Total de quest&otilde;es:</label>
-    <input type="number" id="totalInput" min="1" max="288" value="24" onchange="updateTotal()" onfocus="this.select()">
-    <span class="total-avail" id="totalAvail">24 dispon&iacute;veis nas categorias selecionadas</span>
+    <label for="totalInput">Total (48/categoria):</label>
+    <input type="number" id="totalInput" readonly tabindex="-1" style="background:#ddd;cursor:default">
+    <span class="total-avail" id="totalAvail">0 quest&otilde;es no total</span>
   </div>
   <div class="btn-bar">
     <button onclick="generatePages()">Gerar P&aacute;ginas</button>
@@ -333,24 +333,24 @@ function buildCategoryUI() {
 }
 
 function updateTotal() {
+  const PER_CATEGORY = 48;
   const rows = document.querySelectorAll('#catGrid .cat-row');
-  let avail = 0;
+  let total = 0;
   rows.forEach(row => {
     const cb = row.querySelector('input[type="checkbox"]');
     if (cb.checked) {
       const hint = row.querySelector('.avail-hint').textContent;
-      avail += parseInt(hint);
+      const avail = parseInt(hint);
+      total += Math.min(PER_CATEGORY, avail);
     }
   });
   const totalInput = document.getElementById('totalInput');
-  const max = Math.min(avail, 288);
-  if (parseInt(totalInput.value) > max) totalInput.value = max;
-  totalInput.max = max;
+  totalInput.value = total;
+  totalInput.max = total;
 
   document.getElementById('totalAvail').textContent =
-    max + ' dispon\u00edveis nas categorias selecionadas';
+    total + ' quest\u00f5es no total';
 
-  const total = parseInt(totalInput.value) || 0;
   const pages = Math.ceil(total / QUESTIONS_PER_PAGE);
   const info = document.getElementById('statusInfo');
   if (total > 0) {
@@ -362,41 +362,17 @@ function updateTotal() {
 }
 
 function getConfig() {
+  const PER_CATEGORY = 48;
   const rows = document.querySelectorAll('#catGrid .cat-row');
-  const selected = [];
+  const result = {};
   rows.forEach(row => {
     const cb = row.querySelector('input[type="checkbox"]');
     if (cb.checked) {
-      selected.push(row.querySelector('label').textContent.trim());
+      const cat = row.querySelector('label').textContent.trim();
+      const avail = QUESTIONS.filter(q => q.category === cat).length;
+      result[cat] = Math.min(PER_CATEGORY, avail);
     }
   });
-  if (!selected.length) return {};
-
-  const total = parseInt(document.getElementById('totalInput').value) || 0;
-  if (total <= 0) return {};
-
-  const avail = {};
-  selected.forEach(cat => {
-    avail[cat] = QUESTIONS.filter(q => q.category === cat).length;
-  });
-
-  let remaining = total;
-  const perCat = Math.floor(total / selected.length);
-  const result = {};
-  selected.forEach(cat => { result[cat] = 0; });
-
-  selected.forEach(cat => {
-    result[cat] = Math.min(perCat, avail[cat]);
-    remaining -= result[cat];
-  });
-
-  for (let i = 0; i < selected.length && remaining > 0; i++) {
-    const cat = selected[i];
-    const canAdd = Math.min(remaining, avail[cat] - result[cat]);
-    result[cat] += canAdd;
-    remaining -= canAdd;
-  }
-
   return result;
 }
 
