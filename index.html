@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quiz Perguntados - Gerador de Quest&otilde;es</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaR1gTKlWGY6PPpVF+3j4e5M3yop2u9F1bO6g8wYqM2Sg3Ksa9DkShC0FN0G7+j3g2O03Q0Y3eUvz/dfFVg5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvl0PPhJ3QmGmq/4y1e41mSLByM8ln3yq36+EJ3E8n3I4TqiRtDcvmKakKwQ8qHt3sMyjdSP7R2GBPV6O2nCQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
   @page { size: A4; margin: 12mm 10mm; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,35 +27,59 @@
     padding: 12px 14px;
   }
 
-  .controls h2 { font-size: 13pt; margin-bottom: 10px; }
+  .controls-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .controls-header h2 { font-size: 13pt; }
+  .controls-total { font-size: 9pt; color: #333; }
 
   .cat-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 6px 20px;
-    margin-bottom: 12px;
+    gap: 5px 16px;
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    background: #eee;
   }
 
   .cat-row {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-size: 9.5pt;
   }
-
   .cat-row label { cursor: pointer; display: flex; align-items: center; gap: 5px; }
-  .cat-row input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; }
-  .cat-row input[type="number"] {
-    width: 44px; padding: 2px 4px; font-size: 9pt; text-align: center;
-    border: 1px solid #666;
+  .cat-row input[type="checkbox"] { width: 14px; height: 14px; cursor: pointer; }
+  .cat-row .avail-hint { font-size: 7.5pt; color: #777; margin-left: auto; }
+
+  .total-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    background: #eee;
   }
-  .cat-row .total-hint { font-size: 7.5pt; color: #555; margin-left: auto; }
+  .total-bar label { font-size: 9.5pt; font-weight: 600; }
+  .total-bar input[type="number"] {
+    width: 60px; padding: 3px 6px; font-size: 10pt; text-align: center;
+    border: 1px solid #666; border-radius: 3px;
+  }
+  .total-bar .total-avail { font-size: 8.5pt; color: #555; margin-left: auto; }
 
   .btn-bar {
     display: flex;
     gap: 10px;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: 2px;
   }
 
   .btn-bar button {
@@ -77,7 +103,6 @@
     grid-template-rows: 1fr 1fr 1fr;
     gap: 5mm;
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-    overflow: hidden;
   }
 
   .card {
@@ -139,9 +164,10 @@
   @media (max-width: 800px) {
     body { padding: 6px; }
     .controls { padding: 10px; }
-    .cat-grid { grid-template-columns: 1fr; gap: 5px; }
-    .cat-row { font-size: 10pt; flex-wrap: wrap; }
-    .cat-row input[type="number"] { width: 50px; }
+    .controls-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .cat-grid { grid-template-columns: 1fr; gap: 4px; }
+    .cat-row { font-size: 10pt; }
+    .total-bar { flex-wrap: wrap; }
     .btn-bar { flex-direction: column; align-items: stretch; }
     .btn-bar button { width: 100%; }
     .btn-bar .info { margin: 6px 0 0; text-align: center; }
@@ -182,8 +208,16 @@
 <body>
 
 <div class="controls" id="controls">
-  <h2>Configurar Gera&ccedil;&atilde;o</h2>
+  <div class="controls-header">
+    <h2>Configurar Gera&ccedil;&atilde;o</h2>
+    <span class="controls-total"><strong>288</strong> quest&otilde;es dispon&iacute;veis no total</span>
+  </div>
   <div class="cat-grid" id="catGrid"></div>
+  <div class="total-bar">
+    <label for="totalInput">Total de quest&otilde;es:</label>
+    <input type="number" id="totalInput" min="1" max="288" value="24" onchange="updateTotal()" onfocus="this.select()">
+    <span class="total-avail" id="totalAvail">24 dispon&iacute;veis nas categorias selecionadas</span>
+  </div>
   <div class="btn-bar">
     <button onclick="generatePages()">Gerar P&aacute;ginas</button>
     <button onclick="window.print()" id="printBtn" style="display:none">Imprimir</button>
@@ -233,9 +267,7 @@ function buildCategoryUI() {
     row.className = 'cat-row';
     row.innerHTML = [
       '<label><input type="checkbox" checked onchange="updateTotal()"> ', cat, '</label>',
-      '<input type="number" min="0" max="', count, '" value="', Math.min(6, count),
-      '" onchange="updateTotal()" onfocus="this.select()">',
-      '<span class="total-hint">(', count, ' disp.)</span>'
+      '<span class="avail-hint">', count, ' disp.</span>'
     ].join('');
     grid.appendChild(row);
   });
@@ -244,14 +276,25 @@ function buildCategoryUI() {
 
 function updateTotal() {
   const rows = document.querySelectorAll('#catGrid .cat-row');
-  let total = 0;
+  let avail = 0;
   rows.forEach(row => {
     const cb = row.querySelector('input[type="checkbox"]');
-    const num = row.querySelector('input[type="number"]');
-    if (cb.checked) total += parseInt(num.value) || 0;
+    if (cb.checked) {
+      const hint = row.querySelector('.avail-hint').textContent;
+      avail += parseInt(hint);
+    }
   });
-  const info = document.getElementById('statusInfo');
+  const totalInput = document.getElementById('totalInput');
+  const max = Math.min(avail, 288);
+  if (parseInt(totalInput.value) > max) totalInput.value = max;
+  totalInput.max = max;
+
+  document.getElementById('totalAvail').textContent =
+    max + ' dispon\u00edveis nas categorias selecionadas';
+
+  const total = parseInt(totalInput.value) || 0;
   const pages = Math.ceil(total / QUESTIONS_PER_PAGE);
+  const info = document.getElementById('statusInfo');
   const printBtn = document.getElementById('printBtn');
   if (total > 0) {
     info.textContent = total + ' quest\u00f5es | ' + pages + ' p\u00e1gina(s)';
@@ -264,16 +307,41 @@ function updateTotal() {
 
 function getConfig() {
   const rows = document.querySelectorAll('#catGrid .cat-row');
-  const config = {};
+  const selected = [];
   rows.forEach(row => {
     const cb = row.querySelector('input[type="checkbox"]');
-    const num = row.querySelector('input[type="number"]');
-    if (cb.checked && parseInt(num.value) > 0) {
-      const label = row.querySelector('label').textContent.trim();
-      config[label] = parseInt(num.value);
+    if (cb.checked) {
+      selected.push(row.querySelector('label').textContent.trim());
     }
   });
-  return config;
+  if (!selected.length) return {};
+
+  const total = parseInt(document.getElementById('totalInput').value) || 0;
+  if (total <= 0) return {};
+
+  const avail = {};
+  selected.forEach(cat => {
+    avail[cat] = QUESTIONS.filter(q => q.category === cat).length;
+  });
+
+  let remaining = total;
+  const perCat = Math.floor(total / selected.length);
+  const result = {};
+  selected.forEach(cat => { result[cat] = 0; });
+
+  selected.forEach(cat => {
+    result[cat] = Math.min(perCat, avail[cat]);
+    remaining -= result[cat];
+  });
+
+  for (let i = 0; i < selected.length && remaining > 0; i++) {
+    const cat = selected[i];
+    const canAdd = Math.min(remaining, avail[cat] - result[cat]);
+    result[cat] += canAdd;
+    remaining -= canAdd;
+  }
+
+  return result;
 }
 
 function buildCards(questionList) {
@@ -345,21 +413,31 @@ function generatePages() {
 }
 
 function downloadPDF() {
-  var container = document.getElementById('container');
-  var pages = container.querySelectorAll('.page');
+  var pages = document.querySelectorAll('#container .page');
   if (!pages.length) {
     generatePages();
     setTimeout(function () { downloadPDF(); }, 300);
     return;
   }
 
-  html2pdf().set({
-    margin: 0,
-    filename: 'quiz-perguntados.pdf',
-    image: { type: 'jpeg', quality: 0.95 },
-    html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-  }).from(container).save();
+  var pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+  var i = 0;
+
+  function renderNext() {
+    if (i >= pages.length) {
+      pdf.save('quiz-perguntados.pdf');
+      return;
+    }
+    html2canvas(pages[i], { scale: 2, useCORS: true, letterRendering: true }).then(function (canvas) {
+      var imgData = canvas.toDataURL('image/jpeg', 0.95);
+      if (i > 0) pdf.addPage();
+      pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+      i++;
+      renderNext();
+    });
+  }
+
+  renderNext();
 }
 
 buildCategoryUI();
