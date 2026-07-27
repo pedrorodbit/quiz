@@ -93,15 +93,17 @@
   .page {
     width: 210mm;
     height: 297mm;
-    margin: 0 auto 20px;
+    margin: 0 auto;
     padding: 10mm 8mm;
     background: #fff;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 5mm;
-    break-after: page;
+    border-bottom: 3px dotted #999;
   }
+
+  .page:last-child { border-bottom: none; }
 
   .card {
     border: 1.2px solid #222;
@@ -171,7 +173,7 @@
     .btn-bar .info { margin: 6px 0 0; text-align: center; }
     .page {
       width: 100%; height: auto;
-      padding: 8mm 5mm; gap: 4mm;
+      padding: 8mm 5mm; gap: 4mm; border-bottom: 3px dotted #999;
       grid-template-columns: 1fr;
       grid-template-rows: auto;
     }
@@ -190,7 +192,7 @@
       width: 210mm; height: 297mm;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
-      break-after: page;
+      border-bottom: none;
     }
     .card { border-color: #000; border-width: 1.5px; }
     .card-header { border-bottom-color: #000; }
@@ -426,7 +428,7 @@ function downloadPDF() {
     image: { type: 'jpeg', quality: 0.95 },
     html2canvas: { scale: 2, useCORS: true, letterRendering: true },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['css', 'legacy'] }
+    pagebreak: { mode: 'avoid-all' }
   }).from(container).save();
 }
 
