@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quiz Perguntados - Gerador de Quest&otilde;es</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaR1gTKlWGY6PPpVF+3j4e5M3yop2u9F1bO6g8wYqM2Sg3Ksa9DkShC0FN0G7+j3g2O03Q0Y3eUvz/dfFVg5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvl0PPhJ3QmGmq/4y1e41mSLByM8ln3yq36+EJ3E8n3I4TqiRtDcvmKakKwQ8qHt3sMyjdSP7R2GBPV6O2nCQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
   @page { size: A4; margin: 12mm 10mm; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -102,7 +100,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 5mm;
-
+    break-after: page;
   }
 
   .card {
@@ -188,10 +186,11 @@
     .controls { display: none; }
     .empty-msg { display: none; }
     .page {
-      margin: 0; box-shadow: none; padding: 10mm 8mm;
+      margin: 0; padding: 10mm 8mm;
       width: 210mm; height: 297mm;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
+      break-after: page;
     }
     .card { border-color: #000; border-width: 1.5px; }
     .card-header { border-bottom-color: #000; }
@@ -412,32 +411,23 @@ function generatePages() {
   window.scrollTo(0, 0);
 }
 
-async function downloadPDF() {
-  var pages = document.querySelectorAll('#container .page');
+function downloadPDF() {
+  var container = document.getElementById('container');
+  var pages = container.querySelectorAll('.page');
   if (!pages.length) {
     generatePages();
     setTimeout(function () { downloadPDF(); }, 300);
     return;
   }
 
-  var pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-  window.scrollTo(0, 0);
-
-  for (var i = 0; i < pages.length; i++) {
-    var canvas = await html2canvas(pages[i], {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: '#ffffff',
-      allowTaint: false,
-    });
-    var imgData = canvas.toDataURL('image/jpeg', 0.95);
-    if (i > 0) pdf.addPage();
-    var imgW = 210;
-    var imgH = (canvas.height / canvas.width) * imgW;
-    pdf.addImage(imgData, 'JPEG', 0, 0, imgW, imgH);
-  }
-
-  pdf.save('quiz-perguntados.pdf');
+  html2pdf().set({
+    margin: 0,
+    filename: 'quiz-perguntados.pdf',
+    image: { type: 'jpeg', quality: 0.95 },
+    html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['css', 'legacy'] }
+  }).from(container).save();
 }
 
 buildCategoryUI();
