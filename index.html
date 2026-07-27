@@ -102,7 +102,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 5mm;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+
   }
 
   .card {
@@ -412,7 +412,7 @@ function generatePages() {
   window.scrollTo(0, 0);
 }
 
-function downloadPDF() {
+async function downloadPDF() {
   var pages = document.querySelectorAll('#container .page');
   if (!pages.length) {
     generatePages();
@@ -421,23 +421,23 @@ function downloadPDF() {
   }
 
   var pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-  var i = 0;
+  window.scrollTo(0, 0);
 
-  function renderNext() {
-    if (i >= pages.length) {
-      pdf.save('quiz-perguntados.pdf');
-      return;
-    }
-    html2canvas(pages[i], { scale: 2, useCORS: true, letterRendering: true }).then(function (canvas) {
-      var imgData = canvas.toDataURL('image/jpeg', 0.95);
-      if (i > 0) pdf.addPage();
-      pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
-      i++;
-      renderNext();
+  for (var i = 0; i < pages.length; i++) {
+    var canvas = await html2canvas(pages[i], {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff',
+      allowTaint: false,
     });
+    var imgData = canvas.toDataURL('image/jpeg', 0.95);
+    if (i > 0) pdf.addPage();
+    var imgW = 210;
+    var imgH = (canvas.height / canvas.width) * imgW;
+    pdf.addImage(imgData, 'JPEG', 0, 0, imgW, imgH);
   }
 
-  renderNext();
+  pdf.save('quiz-perguntados.pdf');
 }
 
 buildCategoryUI();
