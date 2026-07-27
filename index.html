@@ -7,7 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
-  @page { size: A4; margin: 0; }
+  @page { size: A4; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -194,8 +194,8 @@
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
       border-bottom: none;
+      page-break-inside: avoid;
     }
-    .page:not(:last-child) { page-break-after: always; }
     .card { border-color: #000; border-width: 1.5px; }
     .card-header { border-bottom-color: #000; }
     .card-answer { border-top-color: #000; }
@@ -445,6 +445,10 @@ async function downloadPDF() {
       var clone = pages[i].cloneNode(true);
       clone.style.margin = '0';
       clone.style.position = 'static';
+      clone.style.gridTemplateColumns = '1fr 1fr';
+      clone.style.gridTemplateRows = '1fr 1fr 1fr';
+      clone.style.width = '210mm';
+      clone.style.height = '297mm';
       temp.appendChild(clone);
       var canvas = await html2canvas(clone, {
         scale: 2,
