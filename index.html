@@ -68,7 +68,7 @@
 
   .page {
     width: 210mm;
-    min-height: 297mm;
+    height: 297mm;
     margin: 0 auto 20px;
     padding: 10mm 8mm;
     background: #fff;
@@ -77,6 +77,7 @@
     grid-template-rows: 1fr 1fr 1fr;
     gap: 5mm;
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    overflow: hidden;
   }
 
   .card {
@@ -145,7 +146,7 @@
     .btn-bar button { width: 100%; }
     .btn-bar .info { margin: 6px 0 0; text-align: center; }
     .page {
-      width: 100%; min-height: auto;
+      width: 100%; height: auto;
       padding: 8mm 5mm; gap: 4mm;
       grid-template-columns: 1fr;
       grid-template-rows: auto;
@@ -162,10 +163,9 @@
     .empty-msg { display: none; }
     .page {
       margin: 0; box-shadow: none; padding: 10mm 8mm;
-      width: 210mm; min-height: 297mm;
+      width: 210mm; height: 297mm;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
-      page-break-after: always;
     }
     .card { border-color: #000; border-width: 1.5px; }
     .card-header { border-bottom-color: #000; }
@@ -186,8 +186,8 @@
   <div class="cat-grid" id="catGrid"></div>
   <div class="btn-bar">
     <button onclick="generatePages()">Gerar P&aacute;ginas</button>
-    <button class="btn-pdf" onclick="downloadPDF()">Baixar PDF</button>
     <button onclick="window.print()" id="printBtn" style="display:none">Imprimir</button>
+    <button class="btn-pdf" onclick="downloadPDF()" id="pdfBtn" style="display:none">Baixar PDF</button>
     <span class="info" id="statusInfo">Nenhuma p&aacute;gina gerada</span>
   </div>
 </div>
@@ -415,6 +415,7 @@ function updateTotal() {
   } else {
     info.textContent = 'Nenhuma p\u00e1gina gerada';
     printBtn.style.display = 'none';
+    document.getElementById('pdfBtn').style.display = 'none';
   }
 }
 
@@ -475,6 +476,7 @@ function generatePages() {
     document.getElementById('container').innerHTML = '<div class="empty-msg">Selecione ao menos uma categoria com quantidade maior que zero.</div>';
     document.getElementById('statusInfo').textContent = 'Nenhuma p\u00e1gina gerada';
     document.getElementById('printBtn').style.display = 'none';
+    document.getElementById('pdfBtn').style.display = 'none';
     return;
   }
 
@@ -494,50 +496,27 @@ function generatePages() {
   const info = document.getElementById('statusInfo');
   info.textContent = selected.length + ' quest\u00f5es em ' + pages.length + ' p\u00e1gina(s)';
   document.getElementById('printBtn').style.display = '';
+  document.getElementById('pdfBtn').style.display = '';
 
   window.scrollTo(0, 0);
 }
 
 function downloadPDF() {
-  var pages = document.querySelectorAll('.page');
-
+  var container = document.getElementById('container');
+  var pages = container.querySelectorAll('.page');
   if (!pages.length) {
     generatePages();
     setTimeout(function () { downloadPDF(); }, 300);
     return;
   }
 
-  var { jsPDF } = window.jspdf;
-  var doc = new jsPDF({
-    unit: 'mm',
-    format: 'a4',
-    orientation: 'portrait',
-    compress: true,
-  });
-  var pageIndex = 0;
-
-  function renderNext() {
-    if (pageIndex >= pages.length) {
-      doc.save('quiz-perguntados.pdf');
-      return;
-    }
-
-    html2canvas(pages[pageIndex], {
-      scale: 2,
-      useCORS: true,
-      letterRendering: true,
-      width: Math.round(210 * 3.7795),
-      height: Math.round(297 * 3.7795),
-    }).then(function (canvas) {
-      var imgData = canvas.toDataURL('image/jpeg', 0.95);
-      if (pageIndex > 0) doc.addPage();
-      doc.addImage(imgData, 'JPEG', 0, 0, 210, 297);
-      pageIndex++;
-      renderNext();
-    });
-  }
-
-  renderNext();
+  html2pdf().set({
+    margin: 0,
+    filename: 'quiz-perguntados.pdf',
+    image: { type: 'jpeg', quality: 0.95 },
+    html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+  }).from(container).save();
 }
 
 buildCategoryUI();
