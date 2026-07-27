@@ -499,8 +499,7 @@ function generatePages() {
 }
 
 function downloadPDF() {
-  const container = document.getElementById('container');
-  const pages = container.querySelectorAll('.page');
+  var pages = document.querySelectorAll('.page');
 
   if (!pages.length) {
     generatePages();
@@ -508,23 +507,37 @@ function downloadPDF() {
     return;
   }
 
-  html2pdf().set({
-    margin: [0, 0, 0, 0],
-    filename: 'quiz-perguntados.pdf',
-    image: { type: 'jpeg', quality: 1 },
-    html2canvas: {
+  var { jsPDF } = window.jspdf;
+  var doc = new jsPDF({
+    unit: 'mm',
+    format: 'a4',
+    orientation: 'portrait',
+    compress: true,
+  });
+  var pageIndex = 0;
+
+  function renderNext() {
+    if (pageIndex >= pages.length) {
+      doc.save('quiz-perguntados.pdf');
+      return;
+    }
+
+    html2canvas(pages[pageIndex], {
       scale: 2,
       useCORS: true,
       letterRendering: true,
       width: Math.round(210 * 3.7795),
-    },
-    jsPDF: {
-      unit: 'mm',
-      format: 'a4',
-      orientation: 'portrait',
-    },
-    pagebreak: { mode: 'css', before: '.page', avoid: '.card' },
-  }).from(container).save();
+      height: Math.round(297 * 3.7795),
+    }).then(function (canvas) {
+      var imgData = canvas.toDataURL('image/jpeg', 0.95);
+      if (pageIndex > 0) doc.addPage();
+      doc.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+      pageIndex++;
+      renderNext();
+    });
+  }
+
+  renderNext();
 }
 
 buildCategoryUI();
