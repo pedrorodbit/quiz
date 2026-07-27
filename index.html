@@ -194,8 +194,8 @@
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
       border-bottom: none;
-      page-break-after: always;
     }
+    .page:not(:last-child) { page-break-after: always; }
     .card { border-color: #000; border-width: 1.5px; }
     .card-header { border-bottom-color: #000; }
     .card-answer { border-top-color: #000; }
@@ -423,33 +423,46 @@ async function downloadPDF() {
     return;
   }
 
-  var temp = document.createElement('div');
-  temp.style.position = 'absolute';
-  temp.style.left = '0';
-  temp.style.top = '0';
-  temp.style.width = '210mm';
-  temp.style.zIndex = '-1';
-  document.body.appendChild(temp);
+  var info = document.getElementById('statusInfo');
+  var originalText = info.textContent;
+  info.textContent = 'Gerando PDF...';
 
-  var pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+  try {
+    if (typeof html2canvas === 'undefined' || typeof jspdf === 'undefined') {
+      throw new Error('Bibliotecas n\u00e3o carregadas. Verifique conex\u00e3o com a internet.');
+    }
 
-  for (var i = 0; i < pages.length; i++) {
-    var clone = pages[i].cloneNode(true);
-    clone.style.margin = '0';
-    clone.style.position = 'static';
-    temp.appendChild(clone);
-    var canvas = await html2canvas(clone, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: '#ffffff',
-    });
-    temp.removeChild(clone);
-    if (i > 0) pdf.addPage();
-    pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, 297);
+    var temp = document.createElement('div');
+    temp.style.position = 'fixed';
+    temp.style.left = '-9999px';
+    temp.style.top = '0';
+    temp.style.width = '210mm';
+    document.body.appendChild(temp);
+
+    var pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+
+    for (var i = 0; i < pages.length; i++) {
+      var clone = pages[i].cloneNode(true);
+      clone.style.margin = '0';
+      clone.style.position = 'static';
+      temp.appendChild(clone);
+      var canvas = await html2canvas(clone, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+      });
+      temp.removeChild(clone);
+      if (i > 0) pdf.addPage();
+      pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, 297);
+    }
+
+    document.body.removeChild(temp);
+    pdf.save('quiz-perguntados.pdf');
+    info.textContent = originalText;
+  } catch (e) {
+    info.textContent = 'Erro: ' + e.message;
+    console.error(e);
   }
-
-  document.body.removeChild(temp);
-  pdf.save('quiz-perguntados.pdf');
 }
 
 buildCategoryUI();
