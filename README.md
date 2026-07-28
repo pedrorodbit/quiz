@@ -63,7 +63,7 @@ No celular, dá pra "adicionar à tela inicial" (Android/Chrome ou iOS/Safari) c
 
 ## Online
 
-Disponível em: https://pedrorodbit.github.io/quiz/
+Disponível em: https://t00ls-dev.github.io/quiz/
 
 ## Sobre a autoria
 
