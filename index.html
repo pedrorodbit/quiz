@@ -389,6 +389,9 @@ const CATEGORIES = [
 
 const LETTERS = ['A', 'B', 'C', 'D'];
 const QUESTIONS_PER_PAGE = 8;
+// Guarda o conjunto completo gerado por último; a tela só renderiza a
+// 1ª página (ver generatePages), mas o PDF (renderPDF) precisa de todas.
+let lastSelectedQuestions = [];
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -434,15 +437,15 @@ function updateTotal() {
   totalInput.max = max;
 
   document.getElementById('totalAvail').textContent =
-    max + ' dispon\u00edveis nas categorias selecionadas';
+    max + ' disponíveis nas categorias selecionadas';
 
   const total = parseInt(totalInput.value) || 0;
   const pages = Math.ceil(total / QUESTIONS_PER_PAGE);
   const info = document.getElementById('statusInfo');
   if (total > 0) {
-    info.textContent = total + ' quest\u00f5es | ' + pages + ' p\u00e1gina(s)';
+    info.textContent = total + ' questões | ' + pages + ' página(s)';
   } else {
-    info.textContent = 'Nenhuma p\u00e1gina gerada';
+    info.textContent = 'Nenhuma página gerada';
     document.getElementById('printBtn').style.display = 'none';
     document.getElementById('pdfBtn').style.display = 'none';
   }
@@ -512,7 +515,7 @@ function buildCards(questionList) {
         '<ul class="card-options">', optionsHtml, '</ul>',
         '<div class="card-answer">',
         '<div class="correct"><span class="opt-letter filled">', LETTERS[q.answer], '</span>', q.options[q.answer], '</div>',
-        '<div class="explanation"><strong>Explica\u00e7\u00e3o:</strong> ', q.explanation, '</div></div>'
+        '<div class="explanation"><strong>Explicação:</strong> ', q.explanation, '</div></div>'
       ].join('');
 
       pageEl.appendChild(card);
@@ -527,8 +530,9 @@ function generatePages() {
   const catNames = Object.keys(config);
 
   if (catNames.length === 0) {
+    lastSelectedQuestions = [];
     document.getElementById('container').innerHTML = '<div class="empty-msg">Selecione ao menos uma categoria com quantidade maior que zero.</div>';
-    document.getElementById('statusInfo').textContent = 'Nenhuma p\u00e1gina gerada';
+    document.getElementById('statusInfo').textContent = 'Nenhuma página gerada';
     document.getElementById('printBtn').style.display = 'none';
     document.getElementById('pdfBtn').style.display = 'none';
     return;
@@ -540,15 +544,21 @@ function generatePages() {
     selected = selected.concat(pick(available, config[cat]));
   });
   selected = shuffle(selected);
+  lastSelectedQuestions = selected;
 
   const container = document.getElementById('container');
   container.innerHTML = '';
 
+  // Só a 1ª página é renderizada na tela: um quiz grande (centenas de
+  // questões) gera dezenas de páginas cheias de cards com borda/sombra,
+  // e desenhar tudo de uma vez trava ou derruba a aba. O PDF (renderPDF)
+  // usa lastSelectedQuestions e monta todas as páginas fora da tela.
   const pages = buildCards(selected);
-  pages.forEach(p => container.appendChild(p));
+  if (pages.length) container.appendChild(pages[0]);
 
   const info = document.getElementById('statusInfo');
-  info.textContent = selected.length + ' quest\u00f5es em ' + pages.length + ' p\u00e1gina(s)';
+  const preview = pages.length > 1 ? ' (mostrando só a 1ª página; o PDF terá todas)' : '';
+  info.textContent = selected.length + ' questões em ' + pages.length + ' página(s)' + preview;
   document.getElementById('printBtn').style.display = '';
   document.getElementById('pdfBtn').style.display = '';
 
@@ -556,15 +566,16 @@ function generatePages() {
 }
 
 async function renderPDF(onProgress) {
-  var pages = document.querySelectorAll('#container .page');
-  if (!pages.length) {
+  if (!lastSelectedQuestions.length) {
     generatePages();
     return null;
   }
 
   if (typeof html2canvas === 'undefined' || typeof jspdf === 'undefined') {
-    throw new Error('Bibliotecas n\u00e3o carregadas. Verifique conex\u00e3o com a internet.');
+    throw new Error('Bibliotecas não carregadas. Verifique conexão com a internet.');
   }
+
+  var pages = buildCards(lastSelectedQuestions);
 
   var temp = document.createElement('div');
   temp.style.position = 'fixed';
@@ -576,7 +587,7 @@ async function renderPDF(onProgress) {
   var pdf = new jspdf.jsPDF('p', 'mm', 'a4');
 
   for (var i = 0; i < pages.length; i++) {
-    var clone = pages[i].cloneNode(true);
+    var clone = pages[i];
     clone.style.margin = '0';
     clone.style.position = 'static';
     clone.style.width = '210mm';
