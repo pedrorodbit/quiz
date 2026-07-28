@@ -532,7 +532,7 @@ function generatePages() {
   window.scrollTo(0, 0);
 }
 
-async function renderPDF() {
+async function renderPDF(onProgress) {
   var pages = document.querySelectorAll('#container .page');
   if (!pages.length) {
     generatePages();
@@ -578,6 +578,7 @@ async function renderPDF() {
     temp.removeChild(clone);
     if (i > 0) pdf.addPage();
     pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 210, 297);
+    if (onProgress) onProgress(i + 1, pages.length);
   }
 
   document.body.removeChild(temp);
@@ -590,7 +591,9 @@ async function downloadPDF() {
   info.textContent = 'Gerando PDF...';
 
   try {
-    var pdf = await renderPDF();
+    var pdf = await renderPDF(function (done, total) {
+      info.textContent = 'Gerando PDF... (' + done + '/' + total + ')';
+    });
     if (pdf) {
       pdf.save('quiz-perguntados.pdf');
       info.textContent = originalText;
@@ -617,13 +620,42 @@ async function printPDF() {
   //
   // A aba precisa abrir de forma síncrona (antes do await) pra não ser
   // bloqueada como pop-up; só a navegação para o PDF acontece depois.
+  //
+  // Gerar o PDF (html2canvas por página) pode levar dezenas de segundos
+  // para quizzes grandes, e a aba fica em about:blank até a navegação
+  // final — sem feedback nela, parece travada. Por isso escrevemos um
+  // spinner com progresso na própria aba enquanto o PDF é montado.
   var info = document.getElementById('statusInfo');
   var originalText = info.textContent;
   var win = window.open('', '_blank');
+  if (win) {
+    win.document.write(
+      '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">' +
+      '<title>Gerando PDF…</title><style>' +
+      'body{font-family:"Segoe UI",Arial,sans-serif;display:flex;' +
+      'align-items:center;justify-content:center;height:100vh;margin:0;' +
+      'background:#eef1f5;color:#334155;}' +
+      '.box{text-align:center}' +
+      '.spinner{width:36px;height:36px;margin:0 auto 14px;' +
+      'border:4px solid #c7d2fe;border-top-color:#4f46e5;border-radius:50%;' +
+      'animation:spin 0.8s linear infinite}' +
+      '@keyframes spin{to{transform:rotate(360deg)}}' +
+      '</style></head><body><div class="box">' +
+      '<div class="spinner"></div><div id="progressText">Gerando PDF…</div>' +
+      '</div></body></html>'
+    );
+    win.document.close();
+  }
 
   info.textContent = 'Preparando impressão...';
   try {
-    var pdf = await renderPDF();
+    var pdf = await renderPDF(function (done, total) {
+      var msg = 'Gerando PDF... (' + done + '/' + total + ')';
+      info.textContent = msg;
+      if (win && win.document && win.document.getElementById('progressText')) {
+        win.document.getElementById('progressText').textContent = msg;
+      }
+    });
     if (!pdf) {
       if (win) win.close();
       setTimeout(function () { printPDF(); }, 300);
