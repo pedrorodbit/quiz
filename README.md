@@ -34,10 +34,12 @@ dá pra abrir `index.html` direto** (`file://`) — navegadores bloqueiam fetch
 local por CORS. Sirva a pasta com qualquer servidor HTTP, por exemplo:
 
 ```bash
-python3 -m http.server 8000
+python3 -m http.server 8000       # Python
+npx serve -l 8000                 # Node (via npx, sem instalar nada)
+php -S localhost:8000             # PHP
 ```
 
-1. Abra `http://localhost:8000/index.html` no navegador
+1. Abra `http://localhost:8000/` no navegador (ajuste a porta conforme o comando escolhido)
 2. Marque/desmarque as categorias desejadas
 3. Ajuste o total de questões (distribuição proporcional automática)
 4. Clique em **Gerar Páginas** para visualizar
@@ -46,6 +48,8 @@ python3 -m http.server 8000
 Dependências: html2canvas e jsPDF carregados via CDN. Imprimir e Baixar PDF usam o mesmo PDF gerado — a impressão não depende do CSS de paginação do navegador.
 
 A seleção de categorias e o total de questões ficam salvos no `localStorage` do navegador, então voltam a aparecer marcados numa próxima visita.
+
+No celular, dá pra "adicionar à tela inicial" (Android/Chrome ou iOS/Safari) com ícone próprio, via `manifest.json`.
 
 ## Estrutura
 
