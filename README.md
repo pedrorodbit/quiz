@@ -45,6 +45,8 @@ python3 -m http.server 8000
 
 Dependências: html2canvas e jsPDF carregados via CDN. Imprimir e Baixar PDF usam o mesmo PDF gerado — a impressão não depende do CSS de paginação do navegador.
 
+A seleção de categorias e o total de questões ficam salvos no `localStorage` do navegador, então voltam a aparecer marcados numa próxima visita.
+
 ## Estrutura
 
 - `index.html` — estrutura da página

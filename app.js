@@ -33,6 +33,32 @@ function pick(items, n) {
   return shuffled.slice(0, Math.min(n, shuffled.length));
 }
 
+const STORAGE_KEY = 'quizConfig';
+
+function saveConfig() {
+  const rows = document.querySelectorAll('#catGrid .cat-row');
+  const categories = [];
+  rows.forEach(row => {
+    const cb = row.querySelector('input[type="checkbox"]');
+    if (cb.checked) categories.push(row.querySelector('label').textContent.trim());
+  });
+  const total = document.getElementById('totalInput').value;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ categories: categories, total: total }));
+  } catch (e) {
+    // localStorage indisponível (modo privado, quota etc.) — não é crítico, ignora
+  }
+}
+
+function loadConfig() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
 function buildCategoryUI() {
   const grid = document.getElementById('catGrid');
   grid.innerHTML = '';
@@ -46,6 +72,20 @@ function buildCategoryUI() {
     ].join('');
     grid.appendChild(row);
   });
+
+  // Restaura seleção/total salvos antes do primeiro updateTotal(), senão
+  // ele já salvaria de volta o estado padrão (tudo marcado) por cima.
+  const saved = loadConfig();
+  if (saved && Array.isArray(saved.categories)) {
+    document.querySelectorAll('#catGrid .cat-row').forEach(row => {
+      const cat = row.querySelector('label').textContent.trim();
+      row.querySelector('input[type="checkbox"]').checked = saved.categories.includes(cat);
+    });
+  }
+  if (saved && saved.total) {
+    document.getElementById('totalInput').value = saved.total;
+  }
+
   updateTotal();
 }
 
@@ -82,6 +122,8 @@ function updateTotal() {
     lastSelectedQuestions = [];
     document.getElementById('container').innerHTML = '<div class="empty-msg">Selecione categorias e quantidades, depois clique em "Gerar Páginas"</div>';
   }
+
+  saveConfig();
 }
 
 function getConfig() {
