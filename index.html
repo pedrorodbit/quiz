@@ -251,11 +251,17 @@
 
     /* display:grid + page-break-after tem bugs conhecidos no preview de
        impressão do Chrome (conteúdo cortado/página em branco); flexbox com
-       tamanho fixo por card é o layout que paginação de impressão lida bem. */
+       tamanho fixo por card é o layout que paginação de impressão lida bem.
+       Altura do card reduzida de 89mm (limite exato) para 84mm: o motor de
+       paginação decide a quebra pela altura NÃO cortada do conteúdo, então
+       zero folga fazia qualquer variação de renderização (borda,
+       arredondamento) empurrar o ponto de quebra, deslocando cada página
+       seguinte um pouco mais para baixo. Essa folga de 15mm por página
+       evita o acúmulo. */
     .card {
       flex: 0 0 calc(50% - 2.5mm);
-      height: 89mm;
-      max-height: 89mm;
+      height: 84mm;
+      max-height: 84mm;
       border: 1.2px solid #000;
       padding: 3.5mm 4mm;
       display: flex;
