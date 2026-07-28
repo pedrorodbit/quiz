@@ -116,20 +116,23 @@
     margin: 0 auto 8px;
     padding: 10mm 8mm;
     background: #fff;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
     gap: 5mm;
   }
 
   /* ========================================
      CARD
-     height: 100% => preenche a célula do grid (89mm)
-     overflow: hidden => nada vaza
-     flex column => header no topo, answer no fundo (margin-top:auto)
+     display:grid com linhas 1fr deixava uma linha crescer além dos 89mm
+     quando o conteúdo era mais longo, e como .page tem overflow:hidden,
+     isso cortava outros cards em vez de simplesmente esticar a página.
+     Flexbox com altura fixa evita o card crescer além do previsto.
   ======================================== */
   .card {
-    height: 100%;
+    flex: 0 0 calc(50% - 2.5mm);
+    height: 89mm;
+    max-height: 89mm;
     border: 1.2px solid #222;
     border-radius: 4px;
     padding: 3.5mm 4mm;
@@ -200,12 +203,17 @@
     .btn-bar .info { margin: 6px 0 0; text-align: center; }
     .page {
       width: 100%; height: auto;
+      max-height: none;
+      overflow: visible;
       padding: 8mm 5mm; gap: 4mm;
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
       border-bottom: 3px dotted #999;
     }
-    .card { padding: 3mm; }
+    .card {
+      flex: 1 1 100%;
+      height: auto;
+      max-height: none;
+      padding: 3mm;
+    }
     .card-question { font-size: 10pt; }
     .card-options li { font-size: 9pt; }
     .controls h2 { font-size: 12pt; text-align: center; }
@@ -512,10 +520,19 @@ async function renderPDF() {
     var clone = pages[i].cloneNode(true);
     clone.style.margin = '0';
     clone.style.position = 'static';
-    clone.style.gridTemplateColumns = '1fr 1fr';
-    clone.style.gridTemplateRows = '1fr 1fr 1fr';
     clone.style.width = '210mm';
     clone.style.height = '297mm';
+    clone.style.maxHeight = '297mm';
+    clone.style.overflow = 'hidden';
+    // Força o layout desktop (2 colunas fixas) mesmo se a página estiver
+    // sendo capturada com a janela estreita, onde a media query mobile
+    // trocaria os cards para empilhados de uma coluna só.
+    var clonedCards = clone.querySelectorAll('.card');
+    for (var j = 0; j < clonedCards.length; j++) {
+      clonedCards[j].style.flex = '0 0 calc(50% - 2.5mm)';
+      clonedCards[j].style.height = '89mm';
+      clonedCards[j].style.maxHeight = '89mm';
+    }
     temp.appendChild(clone);
     var canvas = await html2canvas(clone, {
       scale: 2,
