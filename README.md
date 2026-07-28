@@ -29,7 +29,7 @@ Gerador de páginas de perguntas e respostas estilo Perguntados, otimizado para 
 
 ## Como usar
 
-O banco de questões (`questions.json`) é carregado via `fetch`, então **não
+O banco de questões (`data/questions.json`) é carregado via `fetch`, então **não
 dá pra abrir `index.html` direto** (`file://`) — navegadores bloqueiam fetch
 local por CORS. Sirva a pasta com qualquer servidor HTTP, por exemplo:
 
@@ -50,12 +50,12 @@ A seleção de categorias e o total de questões ficam salvos no `localStorage` 
 ## Estrutura
 
 - `index.html` — estrutura da página
-- `style.css` — estilos (tela, impressão e mobile)
-- `app.js` — lógica de geração de páginas e PDF
-- `questions.json` — banco de questões, carregado via `fetch`
-- `favicon.svg` — ícone da aba do navegador
-- `icon-180.png` / `icon-192.png` / `icon-512.png` — ícones para tela inicial (iOS/Android), gerados a partir do `favicon.svg`
 - `manifest.json` — web app manifest, usado pelo Android/Chrome ao "adicionar à tela inicial"
+- `css/style.css` — estilos (tela, impressão e mobile)
+- `js/app.js` — lógica de geração de páginas e PDF
+- `data/questions.json` — banco de questões, carregado via `fetch`
+- `icons/favicon.svg` — ícone da aba do navegador
+- `icons/icon-180.png` / `icon-192.png` / `icon-512.png` — ícones para tela inicial (iOS/Android), gerados a partir do `favicon.svg`
 
 ## Online
 

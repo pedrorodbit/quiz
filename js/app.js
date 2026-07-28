@@ -369,7 +369,7 @@ async function printPDF() {
   }
 }
 
-fetch('questions.json?v=1785216534')
+fetch('data/questions.json?v=1785216534')
   .then(function (res) {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     return res.json();
