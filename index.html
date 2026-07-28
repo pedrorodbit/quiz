@@ -550,12 +550,43 @@ async function downloadPDF() {
   }
 }
 
-function printPDF() {
-  var pages = document.querySelectorAll('#container .page');
-  if (!pages.length) {
-    generatePages();
+async function printPDF() {
+  // window.print() depende do @media print/page-break do navegador, cujas
+  // margens e paginação variam demais entre navegador/SO/impressora. Em vez
+  // disso, reaproveita o mesmo PDF (html2canvas + jsPDF) que "Baixar PDF"
+  // já gera de forma confiável.
+  //
+  // Chamar .print() dentro de um iframe/aba apontando pro PDF não funciona:
+  // o visualizador de PDF nativo do Chrome roda em contexto isolado e
+  // acessar seu contentWindow lança SecurityError. A alternativa confiável
+  // é abrir o PDF numa nova aba e deixar o próprio visualizador (com botão
+  // de impressão nativo) cuidar do resto — sem depender de CSS de página.
+  //
+  // A aba precisa abrir de forma síncrona (antes do await) pra não ser
+  // bloqueada como pop-up; só a navegação para o PDF acontece depois.
+  var info = document.getElementById('statusInfo');
+  var originalText = info.textContent;
+  var win = window.open('', '_blank');
+
+  info.textContent = 'Preparando impressão...';
+  try {
+    var pdf = await renderPDF();
+    if (!pdf) {
+      if (win) win.close();
+      setTimeout(function () { printPDF(); }, 300);
+      return;
+    }
+    if (!win) {
+      info.textContent = 'Permita pop-ups neste site para imprimir.';
+      return;
+    }
+    win.location.href = pdf.output('bloburl');
+    info.textContent = originalText;
+  } catch (e) {
+    if (win) win.close();
+    info.textContent = 'Erro: ' + e.message;
+    console.error(e);
   }
-  setTimeout(function () { window.print(); }, 100);
 }
 
 buildCategoryUI();
