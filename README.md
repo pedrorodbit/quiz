@@ -33,9 +33,9 @@ Gerador de páginas de perguntas e respostas estilo Perguntados, otimizado para 
 2. Marque/desmarque as categorias desejadas
 3. Ajuste o total de questões (distribuição proporcional automática)
 4. Clique em **Gerar Páginas** para visualizar
-5. Clique em **Baixar PDF** para gerar o arquivo PDF exato A4
+5. Clique em **Imprimir** para abrir o PDF numa nova aba e imprimir direto, ou em **Baixar PDF** para salvar o arquivo A4
 
-Dependências: html2canvas e jsPDF carregados via CDN.
+Dependências: html2canvas e jsPDF carregados via CDN. Imprimir e Baixar PDF usam o mesmo PDF gerado — a impressão não depende do CSS de paginação do navegador.
 
 ## Online
 
