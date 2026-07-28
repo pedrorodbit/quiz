@@ -138,6 +138,7 @@
   }
   .btn-bar button:disabled .btn-spinner { display: inline-block; }
   @keyframes btn-spin { to { transform: rotate(360deg); } }
+  .btn-progress { opacity: 0.8; font-weight: 400; }
 
   .empty-msg {
     max-width: 210mm; margin: 40px auto; text-align: center;
@@ -363,8 +364,8 @@
   </div>
   <div class="btn-bar">
     <button onclick="generatePages()">Gerar Páginas</button>
-    <button onclick="printPDF()" id="printBtn" style="display:none"><span class="btn-spinner"></span>Imprimir</button>
-    <button class="btn-pdf" onclick="downloadPDF()" id="pdfBtn" style="display:none"><span class="btn-spinner"></span>Baixar PDF</button>
+    <button onclick="printPDF()" id="printBtn" style="display:none"><span class="btn-spinner"></span>Imprimir<span class="btn-progress" id="printProgress"></span></button>
+    <button class="btn-pdf" onclick="downloadPDF()" id="pdfBtn" style="display:none"><span class="btn-spinner"></span>Baixar PDF<span class="btn-progress" id="pdfProgress"></span></button>
     <span class="info" id="statusInfo">Nenhuma página gerada</span>
   </div>
 </div>
@@ -610,13 +611,14 @@ async function renderPDF(onProgress) {
 async function downloadPDF() {
   var info = document.getElementById('statusInfo');
   var btn = document.getElementById('pdfBtn');
+  var progress = document.getElementById('pdfProgress');
   var originalText = info.textContent;
   info.textContent = 'Gerando PDF...';
   btn.disabled = true;
 
   try {
     var pdf = await renderPDF(function (done, total) {
-      info.textContent = 'Gerando PDF... (' + done + '/' + total + ')';
+      progress.textContent = ' (' + done + '/' + total + ')';
     });
     if (pdf) {
       pdf.save('quiz-perguntados.pdf');
@@ -629,6 +631,7 @@ async function downloadPDF() {
     console.error(e);
   } finally {
     btn.disabled = false;
+    progress.textContent = '';
   }
 }
 
@@ -653,6 +656,7 @@ async function printPDF() {
   // spinner com progresso na própria aba enquanto o PDF é montado.
   var info = document.getElementById('statusInfo');
   var btn = document.getElementById('printBtn');
+  var progress = document.getElementById('printProgress');
   var originalText = info.textContent;
   btn.disabled = true;
   var win = window.open('', '_blank');
@@ -678,8 +682,8 @@ async function printPDF() {
   info.textContent = 'Preparando impressão...';
   try {
     var pdf = await renderPDF(function (done, total) {
+      progress.textContent = ' (' + done + '/' + total + ')';
       var msg = 'Gerando PDF... (' + done + '/' + total + ')';
-      info.textContent = msg;
       if (win && win.document && win.document.getElementById('progressText')) {
         win.document.getElementById('progressText').textContent = msg;
       }
@@ -701,6 +705,7 @@ async function printPDF() {
     console.error(e);
   } finally {
     btn.disabled = false;
+    progress.textContent = '';
   }
 }
 
