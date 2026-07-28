@@ -40,3 +40,13 @@ Dependências: html2canvas e jsPDF carregados via CDN.
 ## Online
 
 Disponível em: https://pedrorodbit.github.io/quiz/
+
+## Sobre a autoria
+
+Este projeto foi escrito por uma IA (Claude, da Anthropic) em parceria com um
+humano — que trouxe a ideia, revisou cada mudança e testou no navegador de
+verdade.
+
+Nada aqui foi publicado no escuro: rodou, quebrou, foi consertado e rodou de
+novo. Ainda assim, é código da internet — use por sua conta e risco, e abra
+uma issue se achar algo torto.
