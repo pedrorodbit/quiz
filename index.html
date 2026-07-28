@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz Perguntados - Gerador de Quest&otilde;es</title>
+<title>Quiz Perguntados - Gerador de Questões</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
@@ -294,24 +294,24 @@
 
 <div class="controls" id="controls">
   <div class="controls-header">
-    <h2>Configurar Gera&ccedil;&atilde;o</h2>
-    <span class="controls-total"><strong>576</strong> quest&otilde;es dispon&iacute;veis no total</span>
+    <h2>Configurar Geração</h2>
+    <span class="controls-total"><strong>576</strong> questões disponíveis no total</span>
   </div>
   <div class="cat-grid" id="catGrid"></div>
   <div class="total-bar">
-    <label for="totalInput">Total de quest&otilde;es:</label>
+    <label for="totalInput">Total de questões:</label>
     <input type="number" id="totalInput" min="1" value="48" onchange="updateTotal()" onfocus="this.select()">
-    <span class="total-avail" id="totalAvail">0 dispon&iacute;veis nas categorias selecionadas</span>
+    <span class="total-avail" id="totalAvail">0 disponíveis nas categorias selecionadas</span>
   </div>
   <div class="btn-bar">
-    <button onclick="generatePages()">Gerar P&aacute;ginas</button>
+    <button onclick="generatePages()">Gerar Páginas</button>
     <button onclick="printPDF()" id="printBtn" style="display:none">Imprimir</button>
     <button class="btn-pdf" onclick="downloadPDF()" id="pdfBtn" style="display:none">Baixar PDF</button>
-    <span class="info" id="statusInfo">Nenhuma p&aacute;gina gerada</span>
+    <span class="info" id="statusInfo">Nenhuma página gerada</span>
   </div>
 </div>
 
-<div id="container"><div class="empty-msg">Selecione categorias e quantidades, depois clique em "Gerar P&aacute;ginas"</div></div>
+<div id="container"><div class="empty-msg">Selecione categorias e quantidades, depois clique em "Gerar Páginas"</div></div>
 
 <script src="questions.js?v=1785208345"></script>
 <script>
