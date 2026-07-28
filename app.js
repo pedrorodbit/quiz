@@ -16,6 +16,9 @@ const QUESTIONS_PER_PAGE = 8;
 // Guarda o conjunto completo gerado por último; a tela só renderiza a
 // 1ª página (ver generatePages), mas o PDF (renderPDF) precisa de todas.
 let lastSelectedQuestions = [];
+// Preenchido via fetch (ver bootstrap no fim do arquivo); antes disso
+// fica vazio, então nada que dependa de QUESTIONS deve rodar antes.
+let QUESTIONS = [];
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -32,6 +35,7 @@ function pick(items, n) {
 
 function buildCategoryUI() {
   const grid = document.getElementById('catGrid');
+  grid.innerHTML = '';
   CATEGORIES.forEach(cat => {
     const count = QUESTIONS.filter(q => q.category === cat).length;
     const row = document.createElement('div');
@@ -323,4 +327,17 @@ async function printPDF() {
   }
 }
 
-buildCategoryUI();
+fetch('questions.json?v=1785216534')
+  .then(function (res) {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  })
+  .then(function (data) {
+    QUESTIONS = data;
+    buildCategoryUI();
+  })
+  .catch(function (e) {
+    document.getElementById('catGrid').textContent =
+      'Erro ao carregar o banco de questões: ' + e.message;
+    console.error(e);
+  });

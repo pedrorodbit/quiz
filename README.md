@@ -29,13 +29,28 @@ Gerador de páginas de perguntas e respostas estilo Perguntados, otimizado para 
 
 ## Como usar
 
-1. Abra `index.html` no navegador
+O banco de questões (`questions.json`) é carregado via `fetch`, então **não
+dá pra abrir `index.html` direto** (`file://`) — navegadores bloqueiam fetch
+local por CORS. Sirva a pasta com qualquer servidor HTTP, por exemplo:
+
+```bash
+python3 -m http.server 8000
+```
+
+1. Abra `http://localhost:8000/index.html` no navegador
 2. Marque/desmarque as categorias desejadas
 3. Ajuste o total de questões (distribuição proporcional automática)
 4. Clique em **Gerar Páginas** para visualizar
 5. Clique em **Imprimir** para abrir o PDF numa nova aba e imprimir direto, ou em **Baixar PDF** para salvar o arquivo A4
 
 Dependências: html2canvas e jsPDF carregados via CDN. Imprimir e Baixar PDF usam o mesmo PDF gerado — a impressão não depende do CSS de paginação do navegador.
+
+## Estrutura
+
+- `index.html` — estrutura da página
+- `style.css` — estilos (tela, impressão e mobile)
+- `app.js` — lógica de geração de páginas e PDF
+- `questions.json` — banco de questões, carregado via `fetch`
 
 ## Online
 
