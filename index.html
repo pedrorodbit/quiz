@@ -126,8 +126,9 @@
      PAGE LAYOUT (screen + PDF capture)
      box-sizing: border-box => height INCLUI padding
      Total A4: 297mm = padding(20mm) + content(277mm)
-     Grid: 2 cols, 3 rows, gap 5mm
-     Each row: (277mm - 10mm gaps) / 3 = 89mm
+     Grid: 2 cols, 4 rows, gap 5mm
+     Each row: (277mm - 15mm gaps) / 4 = 65.5mm de teto; usamos 60mm
+     de propósito, com folga (ver nota no .card de dentro do @media print)
   ======================================== */
   .page {
     width: 210mm;
@@ -152,8 +153,8 @@
   ======================================== */
   .card {
     flex: 0 0 calc(50% - 2.5mm);
-    height: 89mm;
-    max-height: 89mm;
+    height: 60mm;
+    max-height: 60mm;
     border: 1.2px solid #222;
     border-radius: 4px;
     padding: 3.5mm 4mm;
@@ -294,16 +295,15 @@
     /* display:grid + page-break-after tem bugs conhecidos no preview de
        impressão do Chrome (conteúdo cortado/página em branco); flexbox com
        tamanho fixo por card é o layout que paginação de impressão lida bem.
-       Altura do card reduzida de 89mm (limite exato) para 84mm: o motor de
-       paginação decide a quebra pela altura NÃO cortada do conteúdo, então
-       zero folga fazia qualquer variação de renderização (borda,
-       arredondamento) empurrar o ponto de quebra, deslocando cada página
-       seguinte um pouco mais para baixo. Essa folga de 15mm por página
-       evita o acúmulo. */
+       Altura do card com folga (teto seria 65.5mm p/ 4 linhas, usamos
+       60mm): o motor de paginação decide a quebra pela altura NÃO cortada
+       do conteúdo, então zero folga fazia qualquer variação de renderização
+       (borda, arredondamento) empurrar o ponto de quebra, deslocando cada
+       página seguinte um pouco mais para baixo. */
     .card {
       flex: 0 0 calc(50% - 2.5mm);
-      height: 84mm;
-      max-height: 84mm;
+      height: 60mm;
+      max-height: 60mm;
       border: 1.2px solid #000;
       padding: 3.5mm 4mm;
       display: flex;
@@ -365,7 +365,7 @@ const CATEGORIES = [
 
 
 const LETTERS = ['A', 'B', 'C', 'D'];
-const QUESTIONS_PER_PAGE = 6;
+const QUESTIONS_PER_PAGE = 8;
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -566,8 +566,8 @@ async function renderPDF() {
     var clonedCards = clone.querySelectorAll('.card');
     for (var j = 0; j < clonedCards.length; j++) {
       clonedCards[j].style.flex = '0 0 calc(50% - 2.5mm)';
-      clonedCards[j].style.height = '89mm';
-      clonedCards[j].style.maxHeight = '89mm';
+      clonedCards[j].style.height = '60mm';
+      clonedCards[j].style.maxHeight = '60mm';
     }
     temp.appendChild(clone);
     var canvas = await html2canvas(clone, {

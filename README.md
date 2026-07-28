@@ -4,7 +4,7 @@ Gerador de páginas de perguntas e respostas estilo Perguntados, otimizado para 
 
 ## Formato
 
-- A4 (210 × 297 mm), 6 questões por folha (2 colunas × 3 linhas)
+- A4 (210 × 297 mm), 8 questões por folha (2 colunas × 4 linhas)
 - Cada questão contém: categoria, pergunta, 4 alternativas, resposta e explicação
 - PDF gerado via html2canvas + jsPDF, pronto para impressão
 
