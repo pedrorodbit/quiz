@@ -130,9 +130,6 @@
     vertical-align: -2px;
     animation: btn-spin 0.7s linear infinite;
   }
-  .btn-bar button:first-child .btn-spinner {
-    border-color: rgba(255, 255, 255, 0.5); border-top-color: #fff;
-  }
   .btn-bar #printBtn .btn-spinner, .btn-bar .btn-pdf .btn-spinner {
     border-color: rgba(79, 70, 229, 0.3); border-top-color: #4f46e5;
   }
@@ -448,6 +445,11 @@ function updateTotal() {
     info.textContent = 'Nenhuma página gerada';
     document.getElementById('printBtn').style.display = 'none';
     document.getElementById('pdfBtn').style.display = 'none';
+    // Sem isso, desmarcar todas as categorias (ou zerar o total) escondia
+    // os botões mas deixava a página gerada anteriormente visível na
+    // tela, contradizendo o "Nenhuma página gerada".
+    lastSelectedQuestions = [];
+    document.getElementById('container').innerHTML = '<div class="empty-msg">Selecione categorias e quantidades, depois clique em "Gerar Páginas"</div>';
   }
 }
 
