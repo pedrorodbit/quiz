@@ -53,6 +53,9 @@ A seleção de categorias e o total de questões ficam salvos no `localStorage` 
 - `style.css` — estilos (tela, impressão e mobile)
 - `app.js` — lógica de geração de páginas e PDF
 - `questions.json` — banco de questões, carregado via `fetch`
+- `favicon.svg` — ícone da aba do navegador
+- `icon-180.png` / `icon-192.png` / `icon-512.png` — ícones para tela inicial (iOS/Android), gerados a partir do `favicon.svg`
+- `manifest.json` — web app manifest, usado pelo Android/Chrome ao "adicionar à tela inicial"
 
 ## Online
 
