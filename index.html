@@ -117,6 +117,28 @@
   .btn-bar #printBtn:hover, .btn-bar .btn-pdf:hover { background: #eef2ff; border-color: #4f46e5; }
   .btn-bar .info { font-size: 9.5pt; color: #64748b; margin-left: auto; }
 
+  .btn-bar button:disabled {
+    opacity: 0.7; cursor: not-allowed; transform: none;
+  }
+  .btn-spinner {
+    display: none;
+    width: 12px; height: 12px;
+    margin-right: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-top-color: #fff;
+    border-radius: 50%;
+    vertical-align: -2px;
+    animation: btn-spin 0.7s linear infinite;
+  }
+  .btn-bar button:first-child .btn-spinner {
+    border-color: rgba(255, 255, 255, 0.5); border-top-color: #fff;
+  }
+  .btn-bar #printBtn .btn-spinner, .btn-bar .btn-pdf .btn-spinner {
+    border-color: rgba(79, 70, 229, 0.3); border-top-color: #4f46e5;
+  }
+  .btn-bar button:disabled .btn-spinner { display: inline-block; }
+  @keyframes btn-spin { to { transform: rotate(360deg); } }
+
   .empty-msg {
     max-width: 210mm; margin: 40px auto; text-align: center;
     font-size: 12.5pt; color: #94a3b8;
@@ -341,8 +363,8 @@
   </div>
   <div class="btn-bar">
     <button onclick="generatePages()">Gerar Páginas</button>
-    <button onclick="printPDF()" id="printBtn" style="display:none">Imprimir</button>
-    <button class="btn-pdf" onclick="downloadPDF()" id="pdfBtn" style="display:none">Baixar PDF</button>
+    <button onclick="printPDF()" id="printBtn" style="display:none"><span class="btn-spinner"></span>Imprimir</button>
+    <button class="btn-pdf" onclick="downloadPDF()" id="pdfBtn" style="display:none"><span class="btn-spinner"></span>Baixar PDF</button>
     <span class="info" id="statusInfo">Nenhuma página gerada</span>
   </div>
 </div>
@@ -587,8 +609,10 @@ async function renderPDF(onProgress) {
 
 async function downloadPDF() {
   var info = document.getElementById('statusInfo');
+  var btn = document.getElementById('pdfBtn');
   var originalText = info.textContent;
   info.textContent = 'Gerando PDF...';
+  btn.disabled = true;
 
   try {
     var pdf = await renderPDF(function (done, total) {
@@ -603,6 +627,8 @@ async function downloadPDF() {
   } catch (e) {
     info.textContent = 'Erro: ' + e.message;
     console.error(e);
+  } finally {
+    btn.disabled = false;
   }
 }
 
@@ -626,7 +652,9 @@ async function printPDF() {
   // final — sem feedback nela, parece travada. Por isso escrevemos um
   // spinner com progresso na própria aba enquanto o PDF é montado.
   var info = document.getElementById('statusInfo');
+  var btn = document.getElementById('printBtn');
   var originalText = info.textContent;
+  btn.disabled = true;
   var win = window.open('', '_blank');
   if (win) {
     win.document.write(
@@ -671,6 +699,8 @@ async function printPDF() {
     if (win) win.close();
     info.textContent = 'Erro: ' + e.message;
     console.error(e);
+  } finally {
+    btn.disabled = false;
   }
 }
 
