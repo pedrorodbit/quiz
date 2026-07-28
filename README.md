@@ -1,4 +1,4 @@
-# Quiz Perguntados - Gerador para Impressão
+# Quiz Perguntados
 
 Gerador de páginas de perguntas e respostas estilo Perguntados, otimizado para impressão em folha A4 e download de PDF.
 
