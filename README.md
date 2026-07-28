@@ -50,3 +50,7 @@ verdade.
 Nada aqui foi publicado no escuro: rodou, quebrou, foi consertado e rodou de
 novo. Ainda assim, é código da internet — use por sua conta e risco, e abra
 uma issue se achar algo torto.
+
+## Licença
+
+MIT — veja [LICENSE](LICENSE). Faça o que quiser, só não me culpe se pegar fogo.
