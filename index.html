@@ -236,9 +236,9 @@
       margin: 0;
       padding: 10mm 8mm;
       background: #fff;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(3, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
       gap: 5mm;
       border: none;
       page-break-after: always;
@@ -249,9 +249,13 @@
       break-after: auto;
     }
 
+    /* display:grid + page-break-after tem bugs conhecidos no preview de
+       impressão do Chrome (conteúdo cortado/página em branco); flexbox com
+       tamanho fixo por card é o layout que paginação de impressão lida bem. */
     .card {
-      height: 100%;
-      max-height: 100%;
+      flex: 0 0 calc(50% - 2.5mm);
+      height: 89mm;
+      max-height: 89mm;
       border: 1.2px solid #000;
       padding: 3.5mm 4mm;
       display: flex;
